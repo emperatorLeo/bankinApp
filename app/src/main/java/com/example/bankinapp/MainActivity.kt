@@ -1,46 +1,30 @@
 package com.example.bankinapp
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import com.example.bankinapp.ui.theme.BankinAppTheme
+import com.google.firebase.firestore.FirebaseFirestore
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             BankinAppTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    Greeting("Android")
-                }
+
+                val db = FirebaseFirestore.getInstance()
+                db.collection("User")
+                    .get()
+                    .addOnSuccessListener { result ->
+                        for (user in result) {
+                            Log.d("Leo", "id: ${user.id} ${user.data["Movements"]}")
+                        }
+                    }
+                    .addOnFailureListener { exeption ->
+                        Log.d("Leo", "something went wrong ${exeption.message}")
+                    }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    BankinAppTheme {
-        Greeting("Android")
     }
 }

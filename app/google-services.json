@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "203920299094",
+    "project_id": "bankinapp-fb4d9",
+    "storage_bucket": "bankinapp-fb4d9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:203920299094:android:0d9cdead6eeec2d2add7f7",
+        "android_client_info": {
+          "package_name": "com.example.bankinapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAoFaeLbxgY_C1jY_jnc_jdYGQgAtYPvoU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
