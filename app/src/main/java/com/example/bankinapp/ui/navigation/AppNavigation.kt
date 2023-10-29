@@ -5,6 +5,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.bankinapp.ui.screens.LoginScreen
+import com.example.bankinapp.ui.screens.SignUpScreen
 import com.example.bankinapp.ui.viewmodel.MainViewModel
 
 @Composable
@@ -17,6 +18,10 @@ fun AppNavigation(viewModel: MainViewModel) {
     ) {
         composable(Screen.Login.route) {
             LoginScreen(viewModel = viewModel, navController)
+        }
+
+        composable(Screen.SignUp.route) {
+            SignUpScreen()
         }
     }
 }
