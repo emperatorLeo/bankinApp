@@ -12,7 +12,6 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             BankinAppTheme {
-
                 val db = FirebaseFirestore.getInstance()
                 db.collection("User")
                     .get()
