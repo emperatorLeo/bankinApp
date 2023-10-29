@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import com.example.bankinapp.ui.navigation.AppNavigation
 import com.example.bankinapp.ui.theme.BankinAppTheme
+import com.example.bankinapp.ui.viewmodel.MainViewModel
 import com.google.firebase.firestore.FirebaseFirestore
 
 class MainActivity : ComponentActivity() {
@@ -12,6 +14,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             BankinAppTheme {
+                AppNavigation(viewModel = MainViewModel())
                 val db = FirebaseFirestore.getInstance()
                 db.collection("User")
                     .get()
