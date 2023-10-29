@@ -53,6 +53,7 @@ fun LoginScreen(viewModel: MainViewModel, navController: NavController) {
         )
 
         ActionButton(text = "Continuar", color = Purple40) {
+            viewModel.login("emailSomething", "passwordSomething")
         }
 
         ActionButton(text = "Registrate", color = BrightPurple) {

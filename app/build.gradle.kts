@@ -5,6 +5,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("kotlin-parcelize")
     id("kotlin-kapt")
+    id("dagger.hilt.android.plugin")
     id("com.google.gms.google-services")
     id("org.jlleitschuh.gradle.ktlint")
 }
@@ -69,6 +70,10 @@ dependencies {
 
     // Navigation
     implementation("androidx.navigation:navigation-compose:2.7.4")
+
+    // Hilt dependencies
+    implementation("com.google.dagger:hilt-android:2.45")
+    kapt("com.google.dagger:hilt-android-compiler:2.45")
 
     // Firebase dependencies
     implementation(platform("com.google.firebase:firebase-bom:32.4.0"))
