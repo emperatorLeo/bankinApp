@@ -9,16 +9,14 @@ import com.example.bankinapp.ui.viewmodel.MainViewModel
 
 @Composable
 fun AppNavigation(viewModel: MainViewModel) {
-
     val navController = rememberNavController()
 
     NavHost(
         navController = navController,
         startDestination = Screen.Login.route
     ) {
-        composable(Screen.Login.route){
-            LoginScreen()
+        composable(Screen.Login.route) {
+            LoginScreen(viewModel = viewModel, navController)
         }
-
     }
 }
