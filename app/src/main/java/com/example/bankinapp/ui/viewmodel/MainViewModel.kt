@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.bankinapp.data.db.PASSWORD
-import com.example.bankinapp.ui.states.LoginStates
+import com.example.bankinapp.ui.states.UiStates
 import com.example.bankinapp.usecase.LoginUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -12,21 +12,26 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(private val loginUseCase: LoginUseCase) : ViewModel() {
 
-    private val _uiStates = MutableLiveData<LoginStates>()
-    val uiStates: LiveData<LoginStates> = _uiStates
+    private val _uiStates = MutableLiveData<UiStates>()
+    val uiStates: LiveData<UiStates> = _uiStates
 
     fun login(email: String, password: String) {
-        _uiStates.value = LoginStates.Loading
+        _uiStates.value = UiStates.Loading
         loginUseCase(email, password)
             .addOnSuccessListener {
                 if (it.data == null || it.get(PASSWORD) != password){
-                    _uiStates.value = LoginStates.WrongCredentials
+                    _uiStates.value = UiStates.WrongCredentials
                 }else {
-                    _uiStates.value = LoginStates.Success
+                    _uiStates.value = UiStates.Success
                 }
             }
             .addOnFailureListener {
-                _uiStates.value = LoginStates.Failure
+                _uiStates.value = UiStates.Failure
             }
+    }
+
+    fun signUp(){
+        _uiStates.value = UiStates.Loading
+
     }
 }

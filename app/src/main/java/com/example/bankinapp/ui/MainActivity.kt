@@ -1,6 +1,8 @@
 package com.example.bankinapp.ui
 
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
@@ -19,5 +21,8 @@ class MainActivity : ComponentActivity() {
                 AppNavigation(viewModel = viewModel)
             }
         }
+       if (packageManager.hasSystemFeature(PackageManager.FEATURE_CAMERA_ANY))
+           Log.d("Leo","has Camera")
     }
+
 }

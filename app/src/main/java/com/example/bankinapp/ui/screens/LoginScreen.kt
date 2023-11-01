@@ -28,7 +28,7 @@ import com.example.bankinapp.ui.components.ActionButton
 import com.example.bankinapp.ui.components.InputField
 import com.example.bankinapp.ui.components.TextFieldType
 import com.example.bankinapp.ui.navigation.Screen
-import com.example.bankinapp.ui.states.LoginStates
+import com.example.bankinapp.ui.states.UiStates
 import com.example.bankinapp.ui.theme.BrightPurple
 import com.example.bankinapp.ui.theme.Purple40
 import com.example.bankinapp.ui.theme.Purple80
@@ -95,7 +95,7 @@ fun LoginScreen(viewModel: MainViewModel, navController: NavController) {
             }
         }
 
-        if (uiState == LoginStates.Loading)
+        if (uiState == UiStates.Loading)
             CircularProgressIndicator(
                 modifier = Modifier
                     .align(Alignment.Center)
@@ -104,7 +104,7 @@ fun LoginScreen(viewModel: MainViewModel, navController: NavController) {
                 strokeWidth = 10.dp
             )
 
-        if (uiState == LoginStates.WrongCredentials) {
+        if (uiState == UiStates.WrongCredentials) {
             Toast.makeText(
                 LocalContext.current,
                 "Your EMAIL or PASSWORD is wrong, please try again",
