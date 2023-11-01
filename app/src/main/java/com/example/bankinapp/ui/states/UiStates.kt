@@ -8,4 +8,6 @@ sealed class UiStates {
     object WrongCredentials : UiStates()
 
     object Failure : UiStates()
+
+    object EmptyFields : UiStates()
 }

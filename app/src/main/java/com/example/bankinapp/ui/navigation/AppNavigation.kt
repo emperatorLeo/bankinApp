@@ -21,7 +21,7 @@ fun AppNavigation(viewModel: MainViewModel) {
         }
 
         composable(Screen.SignUp.route) {
-            SignUpScreen()
+            SignUpScreen(viewModel, navController)
         }
     }
 }

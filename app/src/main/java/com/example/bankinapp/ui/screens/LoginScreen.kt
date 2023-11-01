@@ -107,7 +107,7 @@ fun LoginScreen(viewModel: MainViewModel, navController: NavController) {
         if (uiState == UiStates.WrongCredentials) {
             Toast.makeText(
                 LocalContext.current,
-                "Your EMAIL or PASSWORD is wrong, please try again",
+                "Your EMAIL or/and PASSWORD are wrong, please try again",
                 Toast.LENGTH_LONG
             ).show()
         }
