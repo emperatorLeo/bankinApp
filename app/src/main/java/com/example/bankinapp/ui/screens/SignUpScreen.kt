@@ -4,11 +4,13 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -41,28 +43,30 @@ fun SignUpScreen() {
 
         InputField(
             label = "INSERT YOUR EMAIL HERE",
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
             modifier = Modifier,
             PurpleGrey80,
             imageResource = R.drawable.ic_email
-        )
+        ){}
         InputField(
             label = "INSERT YOUR PASSWORD HERE",
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
             modifier = Modifier.padding(top = 30.dp),
             PurpleGrey80,
             imageResource = R.drawable.ic_password
-        )
+        ){}
         InputField(
             label = "INSERT YOUR NAME HERE",
             modifier = Modifier.padding(top = 30.dp),
-            PurpleGrey80,
+            backgroundColor = PurpleGrey80,
             imageResource = R.drawable.ic_user
-        )
+        ){}
         InputField(
             label = "INSERT YOUR LAST NAME HERE",
             modifier = Modifier.padding(top = 30.dp, bottom = 40.dp),
-            PurpleGrey80,
+            backgroundColor = PurpleGrey80,
             imageResource = R.drawable.ic_user
-        )
+        ){}
 
         ActionButton(text = "Sign up", color = BrightPurple) {
         }

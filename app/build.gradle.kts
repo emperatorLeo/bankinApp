@@ -68,6 +68,9 @@ dependencies {
     implementation("androidx.compose.material3:material3")
     implementation("androidx.compose.runtime:runtime-livedata:1.5.4")
 
+    //Gson
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+
     // Navigation
     implementation("androidx.navigation:navigation-compose:2.7.4")
 

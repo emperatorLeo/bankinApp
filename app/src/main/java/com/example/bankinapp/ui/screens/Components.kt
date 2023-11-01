@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -31,7 +32,14 @@ import com.example.bankinapp.ui.theme.White
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun InputField(label: String, modifier: Modifier, backgroundColor: Color, imageResource: Int) {
+fun InputField(
+    label: String,
+    keyboardOptions: KeyboardOptions = KeyboardOptions(),
+    modifier: Modifier,
+    backgroundColor: Color,
+    imageResource: Int,
+    onValueChange: (String) -> Unit
+) {
     var text by rememberSaveable {
         mutableStateOf("")
     }
@@ -63,8 +71,10 @@ fun InputField(label: String, modifier: Modifier, backgroundColor: Color, imageR
             singleLine = true,
             shape = RoundedCornerShape(8.dp),
             value = text,
+            keyboardOptions = keyboardOptions,
             label = { Text(text = label, color = Pink40) },
             onValueChange = {
+                onValueChange(it)
                 text = it
             }
         )
