@@ -10,8 +10,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
@@ -24,9 +25,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.bankinapp.R
+import com.example.bankinapp.ui.theme.BrightPurple
 import com.example.bankinapp.ui.theme.Pink40
 import com.example.bankinapp.ui.theme.White
 
@@ -34,7 +39,7 @@ import com.example.bankinapp.ui.theme.White
 @Composable
 fun InputField(
     label: String,
-    keyboardOptions: KeyboardOptions = KeyboardOptions(),
+    textFieldType: TextFieldType = TextFieldType.NORMAL,
     modifier: Modifier,
     backgroundColor: Color,
     imageResource: Int,
@@ -43,6 +48,13 @@ fun InputField(
     var text by rememberSaveable {
         mutableStateOf("")
     }
+    var visibility by rememberSaveable {
+        mutableStateOf(false)
+    }
+
+    val icon = if (visibility)
+        painterResource(id = R.drawable.ic_visibility)
+    else painterResource(id = R.drawable.ic_disable_visibility)
 
     Row(
         modifier
@@ -71,12 +83,26 @@ fun InputField(
             singleLine = true,
             shape = RoundedCornerShape(8.dp),
             value = text,
-            keyboardOptions = keyboardOptions,
             label = { Text(text = label, color = Pink40) },
             onValueChange = {
                 onValueChange(it)
                 text = it
-            }
+            },
+            trailingIcon = {
+                if (textFieldType == TextFieldType.PASSWORD)
+                    IconButton(onClick = {
+                        visibility = !visibility
+                    }) {
+                        Icon(
+                            painter = icon,
+                            contentDescription = "password visibility icon",
+                            tint = BrightPurple
+                        )
+
+                    }
+            },
+            visualTransformation = if (!visibility) PasswordVisualTransformation()
+            else VisualTransformation.None
         )
     }
 }
@@ -103,4 +129,8 @@ fun ActionButton(modifier: Modifier = Modifier, text: String, color: Color, acti
             color = White
         )
     }
+}
+
+enum class TextFieldType {
+    NORMAL, PASSWORD
 }
