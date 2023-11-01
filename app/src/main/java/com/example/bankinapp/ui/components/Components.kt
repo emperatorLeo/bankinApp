@@ -1,4 +1,4 @@
-package com.example.bankinapp.ui.screens
+package com.example.bankinapp.ui.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -49,7 +49,7 @@ fun InputField(
         mutableStateOf("")
     }
     var visibility by rememberSaveable {
-        mutableStateOf(false)
+        mutableStateOf(textFieldType == TextFieldType.NORMAL)
     }
 
     val icon = if (visibility)

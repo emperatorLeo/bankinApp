@@ -24,6 +24,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.bankinapp.R
+import com.example.bankinapp.ui.components.ActionButton
+import com.example.bankinapp.ui.components.InputField
+import com.example.bankinapp.ui.components.TextFieldType
 import com.example.bankinapp.ui.navigation.Screen
 import com.example.bankinapp.ui.states.LoginStates
 import com.example.bankinapp.ui.theme.BrightPurple

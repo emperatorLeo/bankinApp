@@ -7,7 +7,7 @@
         android:name=".BankinApp"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@drawable/bank_svg"
+        android:icon="@drawable/piggy_bank_2"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
