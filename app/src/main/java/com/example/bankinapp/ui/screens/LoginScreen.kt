@@ -95,21 +95,31 @@ fun LoginScreen(viewModel: MainViewModel, navController: NavController) {
             }
         }
 
-        if (uiState == UiStates.Loading)
-            CircularProgressIndicator(
-                modifier = Modifier
-                    .align(Alignment.Center)
-                    .size(100.dp, 100.dp),
-                color = BrightPurple,
-                strokeWidth = 10.dp
-            )
+        when (uiState) {
+            UiStates.Loading -> {
+                CircularProgressIndicator(
+                    modifier = Modifier
+                        .align(Alignment.Center)
+                        .size(100.dp, 100.dp),
+                    color = BrightPurple,
+                    strokeWidth = 10.dp
+                )
+            }
 
-        if (uiState == UiStates.WrongCredentials) {
-            Toast.makeText(
-                LocalContext.current,
-                "Your EMAIL or/and PASSWORD are wrong, please try again",
-                Toast.LENGTH_LONG
-            ).show()
+            UiStates.WrongCredentials -> {
+                Toast.makeText(
+                    LocalContext.current,
+                    "Your EMAIL or/and PASSWORD are wrong, please try again",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+
+            UiStates.Success -> {
+                navController.popBackStack()
+                navController.navigate(Screen.Home.route)
+            }
+
+            else -> {}
         }
     }
 }
