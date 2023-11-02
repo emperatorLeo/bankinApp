@@ -26,6 +26,7 @@ class MainViewModel @Inject constructor(
     val uiStates: LiveData<UiStates> = _uiStates
     private val _user = MutableLiveData<Pair<String,UserDataEntity>>()
     private val _movementDetail = MutableLiveData<ArrayList<Movements>>()
+    lateinit var selectedMovement: Movements
 
     @Suppress("UNCHECKED_CAST")
     fun login(email: String, password: String) {
@@ -74,4 +75,8 @@ class MainViewModel @Inject constructor(
 
     fun getUserData() = _user.value
     fun getMovementDetail() = _movementDetail.value
+
+    fun selectMovement(index :Int) {
+        selectedMovement = _movementDetail.value!![index]
+    }
 }

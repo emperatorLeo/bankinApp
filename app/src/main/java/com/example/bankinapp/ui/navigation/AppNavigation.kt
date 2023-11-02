@@ -7,6 +7,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.bankinapp.ui.screens.HomeScreen
 import com.example.bankinapp.ui.screens.LoginScreen
 import com.example.bankinapp.ui.screens.SignUpScreen
+import com.example.bankinapp.ui.screens.TransactionDetailScreen
 import com.example.bankinapp.ui.viewmodel.MainViewModel
 
 @Composable
@@ -27,6 +28,10 @@ fun AppNavigation(viewModel: MainViewModel) {
 
         composable(Screen.Home.route) {
             HomeScreen(viewModel = viewModel, navController = navController)
+        }
+
+        composable(Screen.TransactionDetail.route){
+            TransactionDetailScreen(viewModel = viewModel)
         }
     }
 }

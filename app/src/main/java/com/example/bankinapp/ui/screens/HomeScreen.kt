@@ -6,7 +6,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.bankinapp.ui.listitem.MovementItemList
+import com.example.bankinapp.ui.navigation.Screen
 import com.example.bankinapp.ui.theme.Purple40
 import com.example.bankinapp.ui.theme.White
 import com.example.bankinapp.ui.viewmodel.MainViewModel
@@ -71,9 +72,10 @@ fun HomeScreen(viewModel: MainViewModel, navController: NavController) {
                 .padding(top = 10.dp)
                 .fillMaxWidth()
         ) {
-            items(movements!!.toList()) { movement ->
+            itemsIndexed(movements!!.toList()) { index, movement ->
                 MovementItemList(movements = movement) {
-                    // go to detail transaction
+                    viewModel.selectMovement(index = index)
+                    navController.navigate(Screen.TransactionDetail.route)
                 }
             }
         }
