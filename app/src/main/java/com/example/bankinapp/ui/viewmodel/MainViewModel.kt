@@ -1,5 +1,6 @@
 package com.example.bankinapp.ui.viewmodel
 
+import android.graphics.Bitmap
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -27,6 +28,9 @@ class MainViewModel @Inject constructor(
     private val _user = MutableLiveData<Pair<String, UserDataEntity>>()
     private val _movementDetail = MutableLiveData<ArrayList<Movements>>()
     lateinit var selectedMovement: Movements
+
+    private val _photoTaken = MutableLiveData<Bitmap>()
+    val photoTaken: LiveData<Bitmap> = _photoTaken
 
     @Suppress("UNCHECKED_CAST")
     fun login(email: String, password: String) {
@@ -60,7 +64,7 @@ class MainViewModel @Inject constructor(
     }
 
     fun signUp(email: String, userData: UserDataEntity) {
-        if (email.isEmpty() || userData.password.isEmpty() || userData.name.isEmpty() || userData.lastName.isEmpty()) {
+        if (email.isEmpty() || userData.password.isEmpty() || userData.name.isEmpty() || userData.lastName.isEmpty() || _photoTaken.value == null) {
             _uiStates.value = UiStates.EmptyFields
         } else {
             _uiStates.value = UiStates.Loading
@@ -79,5 +83,9 @@ class MainViewModel @Inject constructor(
 
     fun selectMovement(index: Int) {
         selectedMovement = _movementDetail.value!![index]
+    }
+
+    fun setPhoto(photo: Bitmap) {
+        _photoTaken.value = photo
     }
 }

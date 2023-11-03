@@ -1,5 +1,6 @@
 package com.example.bankinapp.ui.navigation
 
+import androidx.camera.view.LifecycleCameraController
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -11,7 +12,7 @@ import com.example.bankinapp.ui.screens.TransactionDetailScreen
 import com.example.bankinapp.ui.viewmodel.MainViewModel
 
 @Composable
-fun AppNavigation(viewModel: MainViewModel) {
+fun AppNavigation(viewModel: MainViewModel, cameraController: LifecycleCameraController) {
     val navController = rememberNavController()
 
     NavHost(
@@ -23,7 +24,7 @@ fun AppNavigation(viewModel: MainViewModel) {
         }
 
         composable(Screen.SignUp.route) {
-            SignUpScreen(viewModel, navController)
+            SignUpScreen(viewModel, cameraController, navController)
         }
 
         composable(Screen.Home.route) {
