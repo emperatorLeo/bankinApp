@@ -18,6 +18,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.bankinapp.ui.listitem.MovementItemList
 import com.example.bankinapp.ui.navigation.Screen
+import com.example.bankinapp.ui.theme.BrightPurple
 import com.example.bankinapp.ui.theme.Purple40
 import com.example.bankinapp.ui.theme.White
 import com.example.bankinapp.ui.viewmodel.MainViewModel
@@ -67,15 +68,26 @@ fun HomeScreen(viewModel: MainViewModel, navController: NavController) {
             textAlign = TextAlign.Center
         )
 
-        LazyColumn(
-            modifier = Modifier
-                .padding(top = 10.dp)
-                .fillMaxWidth()
-        ) {
-            itemsIndexed(movements!!.toList()) { index, movement ->
-                MovementItemList(movements = movement) {
-                    viewModel.selectMovement(index = index)
-                    navController.navigate(Screen.TransactionDetail.route)
+        if (movements!!.isEmpty()) {
+            Text(
+                text = " Aun no tienes movimientos en tu cuenta bancaria",
+                modifier = Modifier.padding(top = 30.dp, start = 20.dp, end = 10.dp).align(Alignment.CenterHorizontally),
+                color = BrightPurple,
+                fontWeight = FontWeight.Bold,
+                fontSize = 20.sp
+            )
+        } else {
+
+            LazyColumn(
+                modifier = Modifier
+                    .padding(top = 10.dp)
+                    .fillMaxWidth()
+            ) {
+                itemsIndexed(movements.toList()) { index, movement ->
+                    MovementItemList(movements = movement) {
+                        viewModel.selectMovement(index = index)
+                        navController.navigate(Screen.TransactionDetail.route)
+                    }
                 }
             }
         }

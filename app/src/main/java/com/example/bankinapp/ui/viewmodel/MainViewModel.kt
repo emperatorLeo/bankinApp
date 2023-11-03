@@ -26,7 +26,7 @@ class MainViewModel @Inject constructor(
     private val _uiStates = MutableLiveData<UiStates>()
     val uiStates: LiveData<UiStates> = _uiStates
     private val _user = MutableLiveData<Pair<String, UserDataEntity>>()
-    private val _movementDetail = MutableLiveData<ArrayList<Movements>>()
+    private val _movementDetail = MutableLiveData<ArrayList<Movements>>(arrayListOf())
     lateinit var selectedMovement: Movements
 
     private val _photoTaken = MutableLiveData<Bitmap>()
