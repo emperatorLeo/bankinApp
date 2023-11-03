@@ -52,9 +52,11 @@ fun InputField(
         mutableStateOf(textFieldType == TextFieldType.NORMAL)
     }
 
-    val icon = if (visibility)
+    val icon = if (visibility) {
         painterResource(id = R.drawable.ic_visibility)
-    else painterResource(id = R.drawable.ic_disable_visibility)
+    } else {
+        painterResource(id = R.drawable.ic_disable_visibility)
+    }
 
     Row(
         modifier
@@ -89,7 +91,7 @@ fun InputField(
                 text = it
             },
             trailingIcon = {
-                if (textFieldType == TextFieldType.PASSWORD)
+                if (textFieldType == TextFieldType.PASSWORD) {
                     IconButton(onClick = {
                         visibility = !visibility
                     }) {
@@ -98,11 +100,14 @@ fun InputField(
                             contentDescription = "password visibility icon",
                             tint = BrightPurple
                         )
-
                     }
+                }
             },
-            visualTransformation = if (!visibility) PasswordVisualTransformation()
-            else VisualTransformation.None
+            visualTransformation = if (!visibility) {
+                PasswordVisualTransformation()
+            } else {
+                VisualTransformation.None
+            }
         )
     }
 }

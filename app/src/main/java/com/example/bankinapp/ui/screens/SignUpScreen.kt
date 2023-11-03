@@ -58,7 +58,6 @@ fun SignUpScreen(viewModel: MainViewModel, navController: NavController) {
         mutableStateOf("")
     }
 
-
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -80,7 +79,6 @@ fun SignUpScreen(viewModel: MainViewModel, navController: NavController) {
                 fontSize = 30.sp,
                 textAlign = TextAlign.Center
             )
-
             InputField(
                 label = "INSERT YOUR EMAIL HERE",
                 modifier = Modifier,
@@ -110,10 +108,12 @@ fun SignUpScreen(viewModel: MainViewModel, navController: NavController) {
             ) { lastName = it }
 
             ActionButton(text = "Sign up", color = BrightPurple) {
-
                 viewModel.signUp(
-                    email = email, userData = UserDataEntity(
-                        name, lastName, password,
+                    email = email,
+                    userData = UserDataEntity(
+                        name,
+                        lastName,
+                        password,
                         arrayListOf()
                     )
                 )
@@ -168,5 +168,4 @@ fun SignUpScreen(viewModel: MainViewModel, navController: NavController) {
             else -> {}
         }
     }
-
 }

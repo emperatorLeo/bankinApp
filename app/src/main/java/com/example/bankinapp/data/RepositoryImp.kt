@@ -10,6 +10,6 @@ class RepositoryImp(private val dataBaseSource: DataBaseSource) : Repository {
         return dataBaseSource.login(email = email, password = password)
     }
 
-    override fun signUp(email: String, userData: UserDataEntity) = dataBaseSource.signUp(email,userData)
-
+    override fun signUp(email: String, userData: UserDataEntity) =
+        dataBaseSource.signUp(email, userData)
 }

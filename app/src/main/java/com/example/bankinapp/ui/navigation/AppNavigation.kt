@@ -30,7 +30,7 @@ fun AppNavigation(viewModel: MainViewModel) {
             HomeScreen(viewModel = viewModel, navController = navController)
         }
 
-        composable(Screen.TransactionDetail.route){
+        composable(Screen.TransactionDetail.route) {
             TransactionDetailScreen(viewModel = viewModel)
         }
     }

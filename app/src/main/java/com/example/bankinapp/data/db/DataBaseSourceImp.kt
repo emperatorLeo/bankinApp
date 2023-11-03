@@ -16,11 +16,12 @@ class DataBaseSourceImp @Inject constructor(private val db: FirebaseFirestore) :
 
     override fun signUp(email: String, userData: UserDataEntity) =
         db.collection(COLLECTION).document(email)
-        .set(hashMapOf(
-            NAME to userData.name,
-            LASTNAME to userData.lastName,
-            PASSWORD to userData.password,
-            MOVEMENTS to arrayListOf<Movements>()
-        ))
-
+            .set(
+                hashMapOf(
+                    NAME to userData.name,
+                    LASTNAME to userData.lastName,
+                    PASSWORD to userData.password,
+                    MOVEMENTS to arrayListOf<Movements>()
+                )
+            )
 }

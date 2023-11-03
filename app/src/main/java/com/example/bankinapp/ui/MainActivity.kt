@@ -21,8 +21,8 @@ class MainActivity : ComponentActivity() {
                 AppNavigation(viewModel = viewModel)
             }
         }
-       if (packageManager.hasSystemFeature(PackageManager.FEATURE_CAMERA_ANY))
-           Log.d("Leo","has Camera")
+        if (packageManager.hasSystemFeature(PackageManager.FEATURE_CAMERA_ANY)) {
+            Log.d("Leo", "has Camera")
+        }
     }
-
 }

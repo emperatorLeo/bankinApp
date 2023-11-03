@@ -24,7 +24,7 @@ class MainViewModel @Inject constructor(
 
     private val _uiStates = MutableLiveData<UiStates>()
     val uiStates: LiveData<UiStates> = _uiStates
-    private val _user = MutableLiveData<Pair<String,UserDataEntity>>()
+    private val _user = MutableLiveData<Pair<String, UserDataEntity>>()
     private val _movementDetail = MutableLiveData<ArrayList<Movements>>()
     lateinit var selectedMovement: Movements
 
@@ -37,12 +37,13 @@ class MainViewModel @Inject constructor(
                     _uiStates.value = UiStates.WrongCredentials
                 } else {
                     _uiStates.value = UiStates.Success
-                    val movementsRaw = it.get(MOVEMENTS) as ArrayList<HashMap<String,Any>>
-                    _movementDetail.value =  fromHashMapToMovements(movementsRaw)
+                    val movementsRaw = it.get(MOVEMENTS) as ArrayList<HashMap<String, Any>>
+                    _movementDetail.value = fromHashMapToMovements(movementsRaw)
 
                     _user.value =
                         Pair(
-                            email, UserDataEntity(
+                            email,
+                            UserDataEntity(
                                 name = it.get(NAME) as String,
                                 lastName = it.get(
                                     LASTNAME
@@ -76,7 +77,7 @@ class MainViewModel @Inject constructor(
     fun getUserData() = _user.value
     fun getMovementDetail() = _movementDetail.value
 
-    fun selectMovement(index :Int) {
+    fun selectMovement(index: Int) {
         selectedMovement = _movementDetail.value!![index]
     }
 }

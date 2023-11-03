@@ -53,7 +53,6 @@ fun LoginScreen(viewModel: MainViewModel, navController: NavController) {
             .fillMaxSize()
             .background(White)
     ) {
-
         Column(
             Modifier
                 .fillMaxSize()

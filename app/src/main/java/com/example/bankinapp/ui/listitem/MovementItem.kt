@@ -26,15 +26,17 @@ import com.example.bankinapp.ui.theme.Purple80
 @Composable
 fun MovementItemList(movements: Movements, click: () -> Unit) {
     val color = if (movements.amount < 0) Red else Green
-    Column(Modifier.padding(start = 10.dp, end = 15.dp,bottom = 20.dp)) {
-        Row(modifier = Modifier
-            .fillMaxWidth()
-            .background(
-                Purple80
-            )
-            .clickable {
-                click.invoke()
-            }) {
+    Column(Modifier.padding(start = 10.dp, end = 15.dp, bottom = 20.dp)) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(
+                    Purple80
+                )
+                .clickable {
+                    click.invoke()
+                }
+        ) {
             Text(
                 modifier = Modifier.align(Alignment.CenterVertically),
                 text = movements.description,
@@ -53,6 +55,11 @@ fun MovementItemList(movements: Movements, click: () -> Unit) {
                 fontWeight = FontWeight.SemiBold
             )
         }
-        Divider(modifier = Modifier.height(1.dp).fillMaxHeight().background(Black))
+        Divider(
+            modifier = Modifier
+                .height(1.dp)
+                .fillMaxHeight()
+                .background(Black)
+        )
     }
 }
