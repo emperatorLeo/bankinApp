@@ -89,7 +89,6 @@ fun LoginScreen(viewModel: MainViewModel, navController: NavController) {
             }
 
             ActionButton(text = "Registrate", color = BrightPurple) {
-                navController.popBackStack()
                 navController.navigate(Screen.SignUp.route)
             }
         }

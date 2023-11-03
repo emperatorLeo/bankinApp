@@ -245,7 +245,7 @@ fun SignUpScreen(
                 Toast.makeText(
                     localContext,
                     "Uno o mas campos estan vacios, todos los campos son obligatorios",
-                    Toast.LENGTH_LONG
+                    Toast.LENGTH_SHORT
                 ).show()
             }
 
