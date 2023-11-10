@@ -42,6 +42,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -61,6 +62,7 @@ import com.example.bankinapp.ui.theme.Purple40
 import com.example.bankinapp.ui.theme.PurpleGrey80
 import com.example.bankinapp.ui.theme.White
 import com.example.bankinapp.ui.viewmodel.MainViewModel
+import com.example.bankinapp.util.Tags.COMPLETE_SIGN_UP_BUTTON
 import kotlinx.coroutines.delay
 
 @Composable
@@ -162,7 +164,7 @@ fun SignUpScreen(
                 displayCamera = !displayCamera
             }
 
-            ActionButton(text = "Sign up", color = BrightPurple) {
+            ActionButton(modifier = Modifier.testTag(COMPLETE_SIGN_UP_BUTTON),text = "Sign up", color = BrightPurple) {
                 viewModel.signUp(
                     email = email,
                     userData = UserDataEntity(

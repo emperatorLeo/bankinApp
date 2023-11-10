@@ -20,6 +20,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -88,7 +89,7 @@ fun LoginScreen(viewModel: MainViewModel, navController: NavController) {
                 viewModel.login(email, password)
             }
 
-            ActionButton(text = "Registrate", color = BrightPurple) {
+            ActionButton(Modifier.testTag("sign_up_button"),text = "Registrate", color = BrightPurple) {
                 navController.navigate(Screen.SignUp.route)
             }
         }
