@@ -1,6 +1,7 @@
 package com.example.bankinapp.ui.viewmodel
 
 import android.graphics.Bitmap
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -45,6 +46,7 @@ class MainViewModel @Inject constructor(
         loginUseCase(email, password)
             .addOnSuccessListener {
                 if (it.data == null || it.get(PASSWORD) != password) {
+                    Log.d("Leo","viewModel wrongCredentials")
                     _loginUiStates.value = LoginUiStates.WrongCredentials
                 } else {
                     _loginUiStates.value = LoginUiStates.Success
