@@ -9,8 +9,8 @@ import androidx.compose.ui.test.performClick
 import com.example.bankinapp.ui.MainActivity
 import com.example.bankinapp.ui.navigation.Screen
 import com.example.bankinapp.ui.theme.BankinAppTheme
-import com.example.bankinapp.util.Tags.COMPLETE_SIGN_UP_BUTTON
-import com.example.bankinapp.util.Tags.SIGN_UP_BUTTON
+import com.example.bankinapp.util.TestTags.COMPLETE_SIGN_UP_BUTTON
+import com.example.bankinapp.util.TestTags.SIGN_UP_BUTTON
 import org.junit.Rule
 import org.junit.Test
 

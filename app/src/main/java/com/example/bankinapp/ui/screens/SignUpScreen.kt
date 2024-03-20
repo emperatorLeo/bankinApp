@@ -31,6 +31,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
@@ -53,16 +54,16 @@ import com.example.bankinapp.R
 import com.example.bankinapp.data.db.entities.UserDataEntity
 import com.example.bankinapp.ui.components.ActionButton
 import com.example.bankinapp.ui.components.CameraPreview
-import com.example.bankinapp.ui.components.InputField
+import com.example.bankinapp.ui.components.CustomInputField
 import com.example.bankinapp.ui.components.TextFieldType
 import com.example.bankinapp.ui.navigation.Screen
-import com.example.bankinapp.ui.states.UiStates
+import com.example.bankinapp.ui.states.SignUpStates
 import com.example.bankinapp.ui.theme.BrightPurple
 import com.example.bankinapp.ui.theme.Purple40
 import com.example.bankinapp.ui.theme.PurpleGrey80
 import com.example.bankinapp.ui.theme.White
 import com.example.bankinapp.ui.viewmodel.MainViewModel
-import com.example.bankinapp.util.Tags.COMPLETE_SIGN_UP_BUTTON
+import com.example.bankinapp.util.TestTags.COMPLETE_SIGN_UP_BUTTON
 import kotlinx.coroutines.delay
 
 @Composable
@@ -72,8 +73,8 @@ fun SignUpScreen(
     navController: NavController
 ) {
     val uiState by viewModel
-        .uiStates
-        .observeAsState()
+        .signUpStates
+        .collectAsState()
 
     val photoTaken by viewModel
         .photoTaken
@@ -119,14 +120,14 @@ fun SignUpScreen(
                 fontSize = 30.sp,
                 textAlign = TextAlign.Center
             )
-            InputField(
+            CustomInputField(
                 label = "INSERT YOUR EMAIL HERE",
                 modifier = Modifier,
                 backgroundColor = PurpleGrey80,
                 imageResource = R.drawable.ic_email
             ) { email = it }
 
-            InputField(
+            CustomInputField(
                 label = "INSERT YOUR PASSWORD HERE",
                 textFieldType = TextFieldType.PASSWORD,
                 modifier = Modifier,
@@ -134,14 +135,14 @@ fun SignUpScreen(
                 imageResource = R.drawable.ic_password
             ) { password = it }
 
-            InputField(
+            CustomInputField(
                 label = "INSERT YOUR NAME HERE",
                 modifier = Modifier,
                 backgroundColor = PurpleGrey80,
                 imageResource = R.drawable.ic_user
             ) { name = it }
 
-            InputField(
+            CustomInputField(
                 label = "INSERT YOUR LAST NAME HERE",
                 modifier = Modifier.padding(bottom = 10.dp),
                 backgroundColor = PurpleGrey80,
@@ -164,7 +165,11 @@ fun SignUpScreen(
                 displayCamera = !displayCamera
             }
 
-            ActionButton(modifier = Modifier.testTag(COMPLETE_SIGN_UP_BUTTON),text = "Sign up", color = BrightPurple) {
+            ActionButton(
+                modifier = Modifier.testTag(COMPLETE_SIGN_UP_BUTTON),
+                text = "Sign up",
+                color = BrightPurple
+            ) {
                 viewModel.signUp(
                     email = email,
                     userData = UserDataEntity(
@@ -202,11 +207,10 @@ fun SignUpScreen(
                         tint = White
                     )
                 }
-
             }
         }
         when (uiState) {
-            UiStates.Loading -> CircularProgressIndicator(
+            SignUpStates.Loading -> CircularProgressIndicator(
                 modifier = Modifier
                     .align(Alignment.Center)
                     .size(100.dp, 100.dp),
@@ -214,7 +218,7 @@ fun SignUpScreen(
                 strokeWidth = 10.dp
             )
 
-            UiStates.Success -> {
+            SignUpStates.Success -> {
                 Box(
                     modifier = Modifier
                         .wrapContentSize()
@@ -235,7 +239,7 @@ fun SignUpScreen(
                 }
             }
 
-            UiStates.Failure -> {
+            SignUpStates.Failure -> {
                 Toast.makeText(
                     localContext,
                     "There was a failure, please try again",
@@ -243,7 +247,7 @@ fun SignUpScreen(
                 ).show()
             }
 
-            UiStates.EmptyFields -> {
+            SignUpStates.EmptyFields -> {
                 Toast.makeText(
                     localContext,
                     "Uno o mas campos estan vacios, todos los campos son obligatorios",

@@ -11,10 +11,14 @@ import com.example.bankinapp.data.db.PASSWORD
 import com.example.bankinapp.data.db.entities.Movements
 import com.example.bankinapp.data.db.entities.UserDataEntity
 import com.example.bankinapp.data.db.entities.fromHashMapToMovements
-import com.example.bankinapp.ui.states.UiStates
+import com.example.bankinapp.ui.states.LoginUiStates
+import com.example.bankinapp.ui.states.SignUpStates
 import com.example.bankinapp.usecase.LoginUseCase
 import com.example.bankinapp.usecase.SignUpUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import javax.inject.Inject
 
 @HiltViewModel
@@ -23,8 +27,11 @@ class MainViewModel @Inject constructor(
     private val signUpUseCase: SignUpUseCase
 ) : ViewModel() {
 
-    private val _uiStates = MutableLiveData<UiStates>()
-    val uiStates: LiveData<UiStates> = _uiStates
+    private val _loginUiStates = MutableStateFlow<LoginUiStates>(LoginUiStates.Idle)
+    val loginUiStates: StateFlow<LoginUiStates> = _loginUiStates.asStateFlow()
+    private val _signUpState = MutableStateFlow<SignUpStates>(SignUpStates.Idle)
+    val signUpStates: StateFlow<SignUpStates> = _signUpState.asStateFlow()
+
     private val _user = MutableLiveData<Pair<String, UserDataEntity>>()
     private val _movementDetail = MutableLiveData<ArrayList<Movements>>(arrayListOf())
     lateinit var selectedMovement: Movements
@@ -34,13 +41,13 @@ class MainViewModel @Inject constructor(
 
     @Suppress("UNCHECKED_CAST")
     fun login(email: String, password: String) {
-        _uiStates.value = UiStates.Loading
+        _loginUiStates.value = LoginUiStates.Loading
         loginUseCase(email, password)
             .addOnSuccessListener {
                 if (it.data == null || it.get(PASSWORD) != password) {
-                    _uiStates.value = UiStates.WrongCredentials
+                    _loginUiStates.value = LoginUiStates.WrongCredentials
                 } else {
-                    _uiStates.value = UiStates.Success
+                    _loginUiStates.value = LoginUiStates.Success
                     val movementsRaw = it.get(MOVEMENTS) as ArrayList<HashMap<String, Any>>
                     _movementDetail.value = fromHashMapToMovements(movementsRaw)
 
@@ -59,21 +66,21 @@ class MainViewModel @Inject constructor(
                 }
             }
             .addOnFailureListener {
-                _uiStates.value = UiStates.Failure
+                _loginUiStates.value = LoginUiStates.Failure
             }
     }
 
     fun signUp(email: String, userData: UserDataEntity) {
         if (email.isEmpty() || userData.password.isEmpty() || userData.name.isEmpty() || userData.lastName.isEmpty() || _photoTaken.value == null) {
-            _uiStates.value = UiStates.EmptyFields
+            _signUpState.value = SignUpStates.EmptyFields
         } else {
-            _uiStates.value = UiStates.Loading
+            _signUpState.value = SignUpStates.Loading
             signUpUseCase(email, userData)
                 .addOnSuccessListener {
-                    _uiStates.value = UiStates.Success
+                    _signUpState.value = SignUpStates.Success
                 }
                 .addOnFailureListener {
-                    _uiStates.value = UiStates.Failure
+                    _signUpState.value = SignUpStates.Failure
                 }
         }
     }

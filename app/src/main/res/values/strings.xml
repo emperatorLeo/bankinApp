@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">BankinApp</string>
+    <!-- Login Screen Area -->
+    <string name="login_screen_email_hint">Insert your email</string>
+    <string name="login_screen_password_hint">Insert your password</string>
+    <string name="login_screen_sign_in_text">Sign in</string>
+    <string name="login_screen_sign_up_text">Registration</string>
+    <string name="login_screen_error_text">Your EMAIL or PASSWORD are wrong, please try again</string>
+    <string name="login_screen_failure_text">we have some server issues, Sorry!</string>
+    <!-- End Login Screen Area -->
+
+    <!-- Components Area -->
+    <string name="component_email_format_error">"Wrong email format, please fix it"</string>
+    <!-- End component Area -->
 </resources>
