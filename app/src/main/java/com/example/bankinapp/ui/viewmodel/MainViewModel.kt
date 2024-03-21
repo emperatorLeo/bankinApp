@@ -14,6 +14,7 @@ import com.example.bankinapp.data.db.entities.UserDataEntity
 import com.example.bankinapp.data.db.entities.fromHashMapToMovements
 import com.example.bankinapp.model.UserInformation
 import com.example.bankinapp.ui.states.LoginUiStates
+import com.example.bankinapp.ui.states.PhotoStates
 import com.example.bankinapp.ui.states.SignUpStates
 import com.example.bankinapp.usecase.LoginUseCase
 import com.example.bankinapp.usecase.SignUpUseCase
@@ -38,8 +39,13 @@ class MainViewModel @Inject constructor(
     private val _movementDetail = MutableLiveData<ArrayList<Movements>>(arrayListOf())
     lateinit var selectedMovement: Movements
 
+    private val _photoState = MutableStateFlow<PhotoStates>(PhotoStates.Idle)
+    val photoState: StateFlow<PhotoStates> = _photoState.asStateFlow()
+
     private val _photoTaken = MutableLiveData<Bitmap>()
     val photoTaken: LiveData<Bitmap> = _photoTaken
+
+    private lateinit var userInformation: UserInformation
 
     @Suppress("UNCHECKED_CAST")
     fun login(email: String, password: String) {
@@ -73,22 +79,8 @@ class MainViewModel @Inject constructor(
             }
     }
 
-    fun signUp(userInformation: UserInformation) {
-        with(userInformation) {
-            if (email.isEmpty() || password.isEmpty() || name.isEmpty() || surname.isEmpty() || _photoTaken.value == null) {
-                _signUpState.value = SignUpStates.EmptyFields
-            } else {
-                _signUpState.value = SignUpStates.Loading
-
-                signUpUseCase(email, UserDataEntity(name, surname, password, arrayListOf()))
-                    .addOnSuccessListener {
-                        _signUpState.value = SignUpStates.Success
-                    }
-                    .addOnFailureListener {
-                        _signUpState.value = SignUpStates.Failure
-                    }
-            }
-        }
+    fun setUserInformation(userInformation: UserInformation) {
+        this.userInformation = userInformation
     }
 
     fun getUserData() = _user.value
@@ -98,7 +90,19 @@ class MainViewModel @Inject constructor(
         selectedMovement = _movementDetail.value!![index]
     }
 
-    fun setPhoto(photo: Bitmap) {
+    fun signUp(photo: Bitmap) {
         _photoTaken.value = photo
+        _photoState.value = PhotoStates.Taken
+
+        with(userInformation) {
+            _signUpState.value = SignUpStates.Loading
+            signUpUseCase(email, UserDataEntity(name, surname, password, arrayListOf()))
+                .addOnSuccessListener {
+                    _signUpState.value = SignUpStates.Success
+                }
+                .addOnFailureListener {
+                    _signUpState.value = SignUpStates.Failure
+                }
+        }
     }
 }

@@ -1,4 +1,4 @@
-package com.example.bankinapp.ui.screens
+package com.example.bankinapp.ui.states
 
 data class InputTextState(
     var isEmailOk: Boolean,

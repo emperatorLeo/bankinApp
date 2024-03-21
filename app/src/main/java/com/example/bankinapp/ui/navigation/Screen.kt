@@ -2,11 +2,13 @@ package com.example.bankinapp.ui.navigation
 
 sealed class Screen(val route: String) {
 
-    object Login : Screen("Login")
+    object Login : Screen("login_screen")
 
-    object SignUp : Screen("SignUp")
+    object SignUp : Screen("sign_up_screen")
 
-    object Home : Screen("Home")
+    object TakePhoto : Screen("take_photo_screen")
 
-    object TransactionDetail : Screen("Transaction_Detail")
+    object Home : Screen("home_screen")
+
+    object TransactionDetail : Screen("transaction_detail_screen")
 }

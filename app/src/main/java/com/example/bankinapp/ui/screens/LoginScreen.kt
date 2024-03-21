@@ -62,126 +62,124 @@ fun LoginScreen(viewModel: MainViewModel, navController: NavController) {
         mutableStateOf(false)
     }
 
-    val uiState by viewModel
-        .loginUiStates.collectAsState()
+    val uiState by viewModel.loginUiStates.collectAsState()
 
-
-        Box(
-            modifier = Modifier
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(White)
+    ) {
+        Column(
+            Modifier
                 .fillMaxSize()
+                .align(Alignment.Center)
                 .background(White)
         ) {
-            Column(
-                Modifier
-                    .fillMaxSize()
-                    .align(Alignment.Center)
-                    .background(White)
+            Image(
+                modifier = Modifier
+                    .align(Alignment.CenterHorizontally)
+                    .padding(top = Dimen50dp, bottom = Dimen10dp)
+                    .width(Dimen200dp)
+                    .height(Dimen200dp),
+                painter = painterResource(id = R.drawable.bank_svg),
+                contentDescription = "welcome icon"
+            )
+
+            CustomInputField(
+                stringResource(id = R.string.login_screen_email_hint),
+                textFieldType = TextFieldType.EMAIL,
+                modifier = Modifier.padding(bottom = Dimen20dp),
+                backgroundColor = Purple80,
+                imageResource = R.drawable.ic_user,
+                isValidEmail = { isEmailValid.value = it }
+            ) { email.value = it }
+
+            CustomInputField(
+                stringResource(id = R.string.login_screen_password_hint),
+                textFieldType = TextFieldType.PASSWORD,
+                modifier = Modifier.padding(bottom = Dimen40dp),
+                Purple80,
+                imageResource = R.drawable.ic_password
+            ) { password.value = it }
+
+            Button(
+                modifier = Modifier
+                    .padding(top = Dimen10dp, start = Dimen40dp, end = Dimen40dp)
+                    .fillMaxWidth()
+                    .height(Dimen50dp),
+                onClick = {
+                    viewModel.login(email.value.trim(), password.value.trim())
+                },
+                shape = CircleShape,
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Purple40,
+                    contentColor = Color.White,
+                    disabledContainerColor = Color.LightGray,
+                    disabledContentColor = GrayDisableText
+                ),
+                enabled = isEmailValid.value && password.value.isNotEmpty()
             ) {
-                Image(
-                    modifier = Modifier
-                        .align(Alignment.CenterHorizontally)
-                        .padding(top = Dimen50dp, bottom = Dimen10dp)
-                        .width(Dimen200dp)
-                        .height(Dimen200dp),
-                    painter = painterResource(id = R.drawable.bank_svg),
-                    contentDescription = "welcome icon"
+                Text(
+                    text = stringResource(id = R.string.login_screen_sign_in_text),
+                    fontSize = Font20sp
                 )
-
-                CustomInputField(
-                    stringResource(id = R.string.login_screen_email_hint),
-                    textFieldType = TextFieldType.EMAIL,
-                    modifier = Modifier.padding(bottom = Dimen20dp),
-                    backgroundColor = Purple80,
-                    imageResource = R.drawable.ic_user,
-                    isValidEmail = { isEmailValid.value = it }
-                ) { email.value = it }
-
-                CustomInputField(
-                    stringResource(id = R.string.login_screen_password_hint),
-                    textFieldType = TextFieldType.PASSWORD,
-                    modifier = Modifier.padding(bottom = Dimen40dp),
-                    Purple80,
-                    imageResource = R.drawable.ic_password
-                ) { password.value = it }
-
-                Button(
-                    modifier = Modifier
-                        .padding(top = Dimen10dp, start = Dimen40dp, end = Dimen40dp)
-                        .fillMaxWidth()
-                        .height(Dimen50dp),
-                    onClick = {
-                        viewModel.login(email.value.trim(), password.value.trim())
-                    },
-                    shape = CircleShape,
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = Purple40,
-                        contentColor = Color.White,
-                        disabledContainerColor = Color.LightGray,
-                        disabledContentColor = GrayDisableText
-                    ),
-                    enabled = isEmailValid.value && password.value.isNotEmpty()
-                ) {
-                    Text(
-                        text = stringResource(id = R.string.login_screen_sign_in_text),
-                        fontSize = Font20sp
-                    )
-                }
-
-                Button(
-                    modifier = Modifier
-                        .padding(top = Dimen10dp, start = Dimen40dp, end = Dimen40dp)
-                        .fillMaxWidth()
-                        .height(Dimen50dp)
-                        .testTag(SIGN_UP_BUTTON),
-                    onClick = {
-                        navController.navigate(Screen.SignUp.route)
-                    },
-                    shape = CircleShape,
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = BrightPurple,
-                        contentColor = Color.White
-                    )
-                ) {
-                    Text(
-                        text = stringResource(id = R.string.login_screen_sign_up_text),
-                        fontSize = Font20sp
-                    )
-                }
             }
 
-            when (uiState) {
-                LoginUiStates.Loading -> {
-                    CircularProgressIndicator(
-                        modifier = Modifier
-                            .align(Alignment.Center)
-                            .size(Dimen100dp, Dimen100dp),
-                        color = BrightPurple,
-                        strokeWidth = Dimen10dp
-                    )
-                }
-
-                LoginUiStates.WrongCredentials -> {
-                    Toast.makeText(
-                        LocalContext.current,
-                        stringResource(id = R.string.login_screen_error_text),
-                        Toast.LENGTH_LONG
-                    ).show()
-                }
-
-                LoginUiStates.Success -> {
-                    navController.popBackStack()
-                    navController.navigate(Screen.Home.route)
-                }
-
-                LoginUiStates.Failure -> {
-                    Toast.makeText(
-                        LocalContext.current,
-                        stringResource(id = R.string.login_screen_failure_text),
-                        Toast.LENGTH_LONG
-                    ).show()
-                }
-
-                LoginUiStates.Idle -> {}
+            Button(
+                modifier = Modifier
+                    .padding(top = Dimen10dp, start = Dimen40dp, end = Dimen40dp)
+                    .fillMaxWidth()
+                    .height(Dimen50dp)
+                    .testTag(SIGN_UP_BUTTON),
+                onClick = {
+                    navController.navigate(Screen.SignUp.route)
+                },
+                shape = CircleShape,
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = BrightPurple,
+                    contentColor = Color.White
+                )
+            ) {
+                Text(
+                    text = stringResource(id = R.string.login_screen_sign_up_text),
+                    fontSize = Font20sp
+                )
             }
+        }
+
+        when (uiState) {
+            LoginUiStates.Loading -> {
+                CircularProgressIndicator(
+                    modifier = Modifier
+                        .align(Alignment.Center)
+                        .size(Dimen100dp, Dimen100dp),
+                    color = BrightPurple,
+                    strokeWidth = Dimen10dp
+                )
+            }
+
+            LoginUiStates.WrongCredentials -> {
+                Toast.makeText(
+                    LocalContext.current,
+                    stringResource(id = R.string.login_screen_error_text),
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+
+            LoginUiStates.Success -> {
+                navController.popBackStack()
+                navController.navigate(Screen.Home.route)
+            }
+
+            LoginUiStates.Failure -> {
+                Toast.makeText(
+                    LocalContext.current,
+                    stringResource(id = R.string.login_screen_failure_text),
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+
+            LoginUiStates.Idle -> {}
+        }
     }
 }

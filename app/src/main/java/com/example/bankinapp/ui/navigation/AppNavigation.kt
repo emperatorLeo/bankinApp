@@ -8,12 +8,16 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.bankinapp.ui.screens.HomeScreen
 import com.example.bankinapp.ui.screens.LoginScreen
+import com.example.bankinapp.ui.screens.PhotoScreen
 import com.example.bankinapp.ui.screens.SignUpScreen
 import com.example.bankinapp.ui.screens.TransactionDetailScreen
 import com.example.bankinapp.ui.viewmodel.MainViewModel
 
 @Composable
-fun AppNavigation(viewModel: MainViewModel = viewModel(), cameraController: LifecycleCameraController) {
+fun AppNavigation(
+    viewModel: MainViewModel = viewModel(),
+    cameraController: LifecycleCameraController
+) {
     val navController = rememberNavController()
 
     NavHost(
@@ -25,7 +29,18 @@ fun AppNavigation(viewModel: MainViewModel = viewModel(), cameraController: Life
         }
 
         composable(Screen.SignUp.route) {
-            SignUpScreen(viewModel = viewModel, cameraController, navController)
+            SignUpScreen(
+                viewModel = viewModel,
+                navController = navController
+            )
+        }
+
+        composable(Screen.TakePhoto.route) {
+            PhotoScreen(
+                cameraController = cameraController,
+                viewModel = viewModel,
+                navController = navController
+            )
         }
 
         composable(Screen.Home.route) {
