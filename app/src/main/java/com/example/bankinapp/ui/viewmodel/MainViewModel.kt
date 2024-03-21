@@ -47,7 +47,7 @@ class MainViewModel @Inject constructor(
         loginUseCase(email, password)
             .addOnSuccessListener {
                 if (it.data == null || it.get(PASSWORD) != password) {
-                    Log.d("Error in FireStore", "viewModel wrongCredentials")
+                    Log.e("Leo", "viewModel wrongCredentials")
                     _loginUiStates.value = LoginUiStates.WrongCredentials
                 } else {
                     _loginUiStates.value = LoginUiStates.Success
