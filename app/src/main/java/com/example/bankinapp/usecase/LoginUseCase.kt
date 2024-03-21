@@ -1,6 +1,6 @@
 package com.example.bankinapp.usecase
 
-import com.example.bankinapp.data.Repository
+import com.example.bankinapp.domain.Repository
 import javax.inject.Inject
 
 class LoginUseCase @Inject constructor(private val repository: Repository) {

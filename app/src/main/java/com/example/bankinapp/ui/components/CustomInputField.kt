@@ -46,7 +46,9 @@ fun CustomInputField(
     modifier: Modifier,
     backgroundColor: Color,
     imageResource: Int,
+    minLengthAllowed: Int = 0,
     isValidEmail: (Boolean) -> Unit = {},
+    reachMinAllowed: (Boolean) -> Unit = {},
     onValueChange: (String) -> Unit
 ) {
     var text by rememberSaveable {
@@ -57,6 +59,10 @@ fun CustomInputField(
     }
 
     var isEmailValid by rememberSaveable {
+        mutableStateOf(true)
+    }
+
+    var reachMinCharAllowed by rememberSaveable {
         mutableStateOf(true)
     }
 
@@ -100,11 +106,23 @@ fun CustomInputField(
                     val currentText = it.trim()
                     onValueChange(currentText)
                     text = currentText
-                    if (textFieldType == EMAIL && currentText.isNotEmpty()) {
-                        isEmailValid = EmailHelper.isEmailValid(currentText)
-                        isValidEmail(isEmailValid)
+                    if (currentText.isNotEmpty()) {
+                        if (textFieldType == EMAIL) {
+                            isEmailValid = EmailHelper.isEmailValid(currentText)
+                            isValidEmail(isEmailValid)
+                        } else {
+                            isEmailValid = true
+                        }
+                        if (textFieldType == NORMAL && minLengthAllowed != 0 && currentText.length < minLengthAllowed){
+                            reachMinAllowed(false)
+                            reachMinCharAllowed = false
+                        }else {
+                            reachMinAllowed(true)
+                            reachMinCharAllowed = true
+                        }
                     } else {
                         isEmailValid = true
+                        reachMinCharAllowed = true
                     }
                 },
                 trailingIcon = {
@@ -131,6 +149,12 @@ fun CustomInputField(
             Text(
                 modifier = Modifier.padding(start = Dimen40dp),
                 text = stringResource(id = R.string.component_email_format_error),
+                color = Color.Red
+            )
+        if (textFieldType == NORMAL && !reachMinCharAllowed)
+            Text(
+                modifier = Modifier.padding(start = Dimen40dp),
+                text = stringResource(id = R.string.component_min_limit_error, minLengthAllowed),
                 color = Color.Red
             )
     }

@@ -1,7 +1,8 @@
 package com.example.bankinapp.data
 
-import com.example.bankinapp.data.db.DataBaseSource
+import com.example.bankinapp.domain.DataBaseSource
 import com.example.bankinapp.data.db.entities.UserDataEntity
+import com.example.bankinapp.domain.Repository
 import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.DocumentSnapshot
 

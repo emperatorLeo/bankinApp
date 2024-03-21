@@ -25,7 +25,7 @@ fun AppNavigation(viewModel: MainViewModel = viewModel(), cameraController: Life
         }
 
         composable(Screen.SignUp.route) {
-            SignUpScreen(viewModel = viewModel(), cameraController, navController)
+            SignUpScreen(viewModel = viewModel, cameraController, navController)
         }
 
         composable(Screen.Home.route) {

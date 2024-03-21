@@ -1,4 +1,4 @@
-package com.example.bankinapp.data.db
+package com.example.bankinapp.domain
 
 import com.example.bankinapp.data.db.entities.UserDataEntity
 import com.google.android.gms.tasks.Task

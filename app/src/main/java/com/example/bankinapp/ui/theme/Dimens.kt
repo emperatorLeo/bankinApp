@@ -10,7 +10,10 @@ val Dimen20dp = 20.dp
 val Dimen40dp = 40.dp
 val Dimen50dp = 50.dp
 val Dimen100dp = 100.dp
+val Dimen120dp = 120.dp
 val Dimen200dp = 200.dp
 
  /** Font Size**/
+ val Font15sp = 15.sp
 val Font20sp = 20.sp
+val Font30sp = 30.sp

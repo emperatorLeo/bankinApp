@@ -10,6 +10,20 @@
     <!-- End Login Screen Area -->
 
     <!-- Components Area -->
-    <string name="component_email_format_error">"Wrong email format, please fix it"</string>
+    <string name="component_email_format_error">Wrong email format, please fix it</string>
+    <string name="component_min_limit_error">You should provide at least %d characters</string>
     <!-- End component Area -->
+
+    <!-- Sign up Screen Area-->
+    <string name="sign_up_screen_title">SIGN UP</string>
+    <string name="sign_up_screen_disclaimer">In order to create you a new account we need some information about you</string>
+    <string name="sign_up_screen_email_label">INSERT YOUR EMAIL HERE</string>
+    <string name="sign_up_screen_password_label">INSERT YOUR PASSWORD HERE</string>
+    <string name="sign_up_screen_name_label">INSERT YOUR NAME HERE</string>
+    <string name="sign_up_screen_surname_label">INSERT YOUR SURNAME HERE</string>
+    <string name="sign_up_screen_photo_label">Take a photo of you</string>
+    <string name="sign_up_screen_success_message">Your account was successfully created and will be redirected to login screen</string>
+    <string name="sign_up_screen_failure_message">There was a failure, please try again</string>
+    <string name="sign_up_screen_empty_fields_message">One or more fields are empty</string>
+    <!-- End Sign up Area -->
 </resources>

@@ -1,6 +1,6 @@
 package com.example.bankinapp.usecase
 
-import com.example.bankinapp.data.Repository
+import com.example.bankinapp.domain.Repository
 import com.example.bankinapp.data.db.entities.UserDataEntity
 import javax.inject.Inject
 

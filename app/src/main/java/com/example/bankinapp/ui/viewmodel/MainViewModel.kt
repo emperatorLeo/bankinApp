@@ -12,6 +12,7 @@ import com.example.bankinapp.data.db.PASSWORD
 import com.example.bankinapp.data.db.entities.Movements
 import com.example.bankinapp.data.db.entities.UserDataEntity
 import com.example.bankinapp.data.db.entities.fromHashMapToMovements
+import com.example.bankinapp.model.UserInformation
 import com.example.bankinapp.ui.states.LoginUiStates
 import com.example.bankinapp.ui.states.SignUpStates
 import com.example.bankinapp.usecase.LoginUseCase
@@ -46,7 +47,7 @@ class MainViewModel @Inject constructor(
         loginUseCase(email, password)
             .addOnSuccessListener {
                 if (it.data == null || it.get(PASSWORD) != password) {
-                    Log.d("Leo","viewModel wrongCredentials")
+                    Log.d("Error in FireStore", "viewModel wrongCredentials")
                     _loginUiStates.value = LoginUiStates.WrongCredentials
                 } else {
                     _loginUiStates.value = LoginUiStates.Success
@@ -72,18 +73,21 @@ class MainViewModel @Inject constructor(
             }
     }
 
-    fun signUp(email: String, userData: UserDataEntity) {
-        if (email.isEmpty() || userData.password.isEmpty() || userData.name.isEmpty() || userData.lastName.isEmpty() || _photoTaken.value == null) {
-            _signUpState.value = SignUpStates.EmptyFields
-        } else {
-            _signUpState.value = SignUpStates.Loading
-            signUpUseCase(email, userData)
-                .addOnSuccessListener {
-                    _signUpState.value = SignUpStates.Success
-                }
-                .addOnFailureListener {
-                    _signUpState.value = SignUpStates.Failure
-                }
+    fun signUp(userInformation: UserInformation) {
+        with(userInformation) {
+            if (email.isEmpty() || password.isEmpty() || name.isEmpty() || surname.isEmpty() || _photoTaken.value == null) {
+                _signUpState.value = SignUpStates.EmptyFields
+            } else {
+                _signUpState.value = SignUpStates.Loading
+
+                signUpUseCase(email, UserDataEntity(name, surname, password, arrayListOf()))
+                    .addOnSuccessListener {
+                        _signUpState.value = SignUpStates.Success
+                    }
+                    .addOnFailureListener {
+                        _signUpState.value = SignUpStates.Failure
+                    }
+            }
         }
     }
 

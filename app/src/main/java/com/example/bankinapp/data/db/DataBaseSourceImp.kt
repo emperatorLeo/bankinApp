@@ -2,6 +2,7 @@ package com.example.bankinapp.data.db
 
 import com.example.bankinapp.data.db.entities.Movements
 import com.example.bankinapp.data.db.entities.UserDataEntity
+import com.example.bankinapp.domain.DataBaseSource
 import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
