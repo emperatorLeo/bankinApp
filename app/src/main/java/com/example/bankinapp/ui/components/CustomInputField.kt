@@ -113,12 +113,12 @@ fun CustomInputField(
                         } else {
                             isEmailValid = true
                         }
-                        if (textFieldType == NORMAL && minLengthAllowed != 0 && currentText.length < minLengthAllowed){
+                        reachMinCharAllowed = if (textFieldType == NORMAL && minLengthAllowed != 0 && currentText.length < minLengthAllowed){
                             reachMinAllowed(false)
-                            reachMinCharAllowed = false
+                            false
                         }else {
                             reachMinAllowed(true)
-                            reachMinCharAllowed = true
+                            true
                         }
                     } else {
                         isEmailValid = true
