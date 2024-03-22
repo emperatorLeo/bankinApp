@@ -58,7 +58,7 @@ import com.example.bankinapp.ui.components.CameraPreview
 import com.example.bankinapp.ui.navigation.Screen
 import com.example.bankinapp.ui.states.PhotoStates
 import com.example.bankinapp.ui.states.SignUpStates
-import com.example.bankinapp.ui.theme.BrightPurple
+import com.example.bankinapp.ui.theme.DarkBlue
 import com.example.bankinapp.ui.theme.Dimen100dp
 import com.example.bankinapp.ui.theme.Dimen10dp
 import com.example.bankinapp.ui.theme.Dimen200dp
@@ -71,10 +71,9 @@ import com.example.bankinapp.ui.theme.Font15sp
 import com.example.bankinapp.ui.theme.Font20sp
 import com.example.bankinapp.ui.theme.Font30sp
 import com.example.bankinapp.ui.theme.GrayDisableText
-import com.example.bankinapp.ui.theme.Pink40
-import com.example.bankinapp.ui.theme.Purple40
-import com.example.bankinapp.ui.theme.Purple80
-import com.example.bankinapp.ui.theme.White
+import com.example.bankinapp.ui.theme.LightBlue
+import com.example.bankinapp.ui.theme.MediumLightBlue
+import com.example.bankinapp.ui.theme.WhiteText
 import com.example.bankinapp.ui.viewmodel.MainViewModel
 import com.example.bankinapp.util.TestTags.COMPLETE_SIGN_UP_BUTTON
 
@@ -102,13 +101,13 @@ fun PhotoScreen(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(White)
+            .background(DarkBlue)
     ) {
 
         Column(
             Modifier
                 .fillMaxSize()
-                .background(color = Color.White)
+                .background(color = DarkBlue)
         ) {
             TopAppBar(title = { }, navigationIcon = {
                 Icon(
@@ -121,7 +120,7 @@ fun PhotoScreen(
                     contentDescription = "",
                     tint = Color.White
                 )
-            }, colors = TopAppBarDefaults.largeTopAppBarColors(containerColor = Purple80))
+            }, colors = TopAppBarDefaults.largeTopAppBarColors(containerColor = MediumLightBlue))
 
             Text(
                 modifier = Modifier
@@ -129,7 +128,7 @@ fun PhotoScreen(
                     .align(Alignment.CenterHorizontally),
                 fontWeight = FontWeight.Bold,
                 text = stringResource(id = R.string.take_photo_screen_title),
-                color = Purple40,
+                color = WhiteText,
                 fontSize = Font30sp,
                 textAlign = TextAlign.Center
             )
@@ -140,7 +139,7 @@ fun PhotoScreen(
                     .align(Alignment.CenterHorizontally),
                 fontWeight = FontWeight.SemiBold,
                 text = stringResource(id = R.string.take_photo_disclaimer),
-                color = Pink40,
+                color = WhiteText,
                 fontSize = Font15sp,
                 textAlign = TextAlign.Center
             )
@@ -183,7 +182,7 @@ fun PhotoScreen(
                     Icon(
                         imageVector = Icons.Default.PhotoCamera,
                         contentDescription = "Take a photo",
-                        tint = Purple40
+                        tint = WhiteText
                     )
                 }
             }
@@ -199,7 +198,7 @@ fun PhotoScreen(
                 },
                 shape = CircleShape,
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = BrightPurple,
+                    containerColor = LightBlue,
                     contentColor = Color.White,
                     disabledContainerColor = Color.LightGray,
                     disabledContentColor = GrayDisableText
@@ -219,7 +218,7 @@ fun PhotoScreen(
                     .padding(bottom = Dimen50dp)
                     .align(Alignment.BottomCenter)
                     .size(Dimen100dp, Dimen100dp),
-                color = BrightPurple,
+                color = LightBlue,
                 strokeWidth = Dimen10dp
             )
 

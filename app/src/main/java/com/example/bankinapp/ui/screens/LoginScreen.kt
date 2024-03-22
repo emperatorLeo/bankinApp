@@ -137,7 +137,7 @@ fun LoginScreen(viewModel: MainViewModel, navController: NavController) {
                 },
                 shape = CircleShape,
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = DarkBlue,
+                    containerColor = MediumLightBlue,
                     contentColor = Color.White
                 )
             ) {

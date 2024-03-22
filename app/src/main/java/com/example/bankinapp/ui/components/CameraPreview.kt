@@ -18,7 +18,7 @@ fun CameraPreview(
     AndroidView(factory = {
         PreviewView(it).apply {
             this.controller = controller
-            controller.cameraSelector = CameraSelector.DEFAULT_FRONT_CAMERA
+            controller.cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
             controller.bindToLifecycle(lifecycleOwner)
         }
     }, modifier = modifier)

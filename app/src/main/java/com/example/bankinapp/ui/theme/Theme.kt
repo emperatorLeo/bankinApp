@@ -47,7 +47,7 @@ fun BankinAppTheme(
     if (!view.isInEditMode) {
         SideEffect {
             val window = (view.context as Activity).window
-            window.statusBarColor = TransparentBlack.toArgb()
+            window.statusBarColor = LightBlue.toArgb()
             WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = darkTheme
         }
     }
