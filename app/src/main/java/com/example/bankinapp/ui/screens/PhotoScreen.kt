@@ -19,12 +19,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.PhotoCamera
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -36,7 +34,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
@@ -66,6 +63,7 @@ import com.example.bankinapp.ui.theme.Dimen100dp
 import com.example.bankinapp.ui.theme.Dimen10dp
 import com.example.bankinapp.ui.theme.Dimen200dp
 import com.example.bankinapp.ui.theme.Dimen20dp
+import com.example.bankinapp.ui.theme.Dimen250dp
 import com.example.bankinapp.ui.theme.Dimen40dp
 import com.example.bankinapp.ui.theme.Dimen50dp
 import com.example.bankinapp.ui.theme.Dimen5dp
@@ -79,7 +77,6 @@ import com.example.bankinapp.ui.theme.Purple80
 import com.example.bankinapp.ui.theme.White
 import com.example.bankinapp.ui.viewmodel.MainViewModel
 import com.example.bankinapp.util.TestTags.COMPLETE_SIGN_UP_BUTTON
-import kotlinx.coroutines.delay
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -120,7 +117,7 @@ fun PhotoScreen(
                         .clickable {
                             navController.popBackStack()
                         },
-                    imageVector = Icons.Filled.ArrowBack,
+                    imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                     contentDescription = "",
                     tint = Color.White
                 )
@@ -153,8 +150,8 @@ fun PhotoScreen(
                     photoTaken.value!!.asImageBitmap(),
                     contentDescription = "photo",
                     modifier = Modifier
-                        .width(Dimen200dp)
-                        .height(Dimen200dp)
+                        .padding(top = Dimen100dp)
+                        .size(Dimen200dp)
                         .align(Alignment.CenterHorizontally)
                         .clip(RoundedCornerShape(10.dp))
                 )
@@ -163,12 +160,13 @@ fun PhotoScreen(
                     controller = cameraController,
                     Modifier
                         .padding(top = Dimen100dp)
-                        .size(Dimen200dp)
+                        .size(Dimen250dp)
                         .align(Alignment.CenterHorizontally)
                 )
             }
-
-            if (photoState.value == PhotoStates.Idle)
+            var buttonTop = Dimen50dp
+            if (photoState.value == PhotoStates.Idle) {
+                buttonTop = Dimen5dp
                 IconButton(
                     modifier = Modifier
                         .padding(Dimen50dp)
@@ -178,7 +176,7 @@ fun PhotoScreen(
                             controller = cameraController,
                             localContext
                         ) {
-                            viewModel.signUp(it)
+                            viewModel.setPhoto(it)
                             displayCamera = !displayCamera
                         }
                     }) {
@@ -188,10 +186,11 @@ fun PhotoScreen(
                         tint = Purple40
                     )
                 }
+            }
 
             Button(
                 modifier = Modifier
-                    .padding(top = Dimen10dp, start = Dimen40dp, end = Dimen40dp)
+                    .padding(top = buttonTop, start = Dimen40dp, end = Dimen40dp, bottom = Dimen10dp)
                     .fillMaxWidth()
                     .height(Dimen50dp)
                     .testTag(COMPLETE_SIGN_UP_BUTTON),
@@ -205,7 +204,7 @@ fun PhotoScreen(
                     disabledContainerColor = Color.LightGray,
                     disabledContentColor = GrayDisableText
                 ),
-                enabled = photoState.value == PhotoStates.Taken
+                enabled = !(photoState.value != PhotoStates.Taken || signUpStates == SignUpStates.Loading)
             ) {
                 Text(
                     text = stringResource(id = R.string.sign_up_screen_title),
@@ -217,31 +216,16 @@ fun PhotoScreen(
         when (signUpStates) {
             SignUpStates.Loading -> CircularProgressIndicator(
                 modifier = Modifier
-                    .align(Alignment.Center)
+                    .padding(bottom = Dimen50dp)
+                    .align(Alignment.BottomCenter)
                     .size(Dimen100dp, Dimen100dp),
                 color = BrightPurple,
                 strokeWidth = Dimen10dp
             )
 
             SignUpStates.Success -> {
-                Box(
-                    modifier = Modifier
-                        .wrapContentSize()
-                        .align(Alignment.Center)
-                        .background(BrightPurple)
-                ) {
-                    Text(
-                        text = stringResource(id = R.string.sign_up_screen_success_message),
-                        color = Color.White,
-                        textAlign = TextAlign.Center,
-                        fontWeight = FontWeight.Bold
-                    )
-                    LaunchedEffect(Unit) {
-                        delay(2500)
-                        navController.popBackStack()
-                        navController.navigate(Screen.Login.route)
-                    }
-                }
+                navController.popBackStack()
+                navController.navigate(route = Screen.Success.route)
             }
 
             SignUpStates.Failure -> {

@@ -88,7 +88,7 @@ fun LoginScreen(viewModel: MainViewModel, navController: NavController) {
             CustomInputField(
                 stringResource(id = R.string.login_screen_email_hint),
                 textFieldType = TextFieldType.EMAIL,
-                modifier = Modifier.padding(bottom = Dimen20dp),
+                modifier = Modifier.padding(bottom = Dimen10dp, top = Dimen20dp),
                 backgroundColor = Purple80,
                 imageResource = R.drawable.ic_user,
                 isValidEmail = { isEmailValid.value = it }

@@ -23,14 +23,15 @@
     <string name="sign_up_screen_surname_label">INSERT YOUR SURNAME HERE</string>
     <string name="sign_up_screen_next_label">Next</string>
     <string name="sign_up_screen_photo_label">Take a photo of you</string>
-    <string name="sign_up_screen_success_message">Your account was successfully created and will be redirected to login screen</string>
+    <string name="sign_up_screen_success_message">Your account was successfully created and will be redirected to login screen shortly</string>
+    <string name="sign_up_screen_success_message_spa">Tu cuenta ha sido creada exitosamente</string>
     <string name="sign_up_screen_failure_message">There was a failure, please try again</string>
     <string name="sign_up_screen_empty_fields_message">One or more fields are empty</string>
     <!-- End Sign up Area -->
 
     <!-- Take Photo Screen Area-->
     <string name="take_photo_screen_title">TAKE A PHOTO</string>
-    <string name="take_photo_disclaimer">Lastly we need a picture of you</string>
+    <string name="take_photo_disclaimer">Lastly we need a picture of your ID</string>
 
     <!-- End of Take Photo Screen Area-->
 </resources>

@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
@@ -38,7 +37,6 @@ import com.example.bankinapp.ui.theme.Dimen8dp
 import com.example.bankinapp.ui.theme.Pink40
 import com.example.bankinapp.util.EmailHelper
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CustomInputField(
     label: String,
@@ -90,9 +88,11 @@ fun CustomInputField(
                 modifier = Modifier
                     .padding(start = Dimen10dp)
                     .align(Alignment.CenterVertically),
-                colors = TextFieldDefaults.textFieldColors(
-                    textColor = color,
-                    containerColor = backgroundColor,
+                colors = TextFieldDefaults.colors(
+                    focusedTextColor = color,
+                    focusedContainerColor = backgroundColor,
+                    unfocusedTextColor = color,
+                    unfocusedContainerColor = backgroundColor,
                     cursorColor = color,
                     disabledIndicatorColor = Color.Transparent,
                     unfocusedIndicatorColor = Color.Transparent,

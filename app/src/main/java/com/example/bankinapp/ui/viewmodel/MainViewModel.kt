@@ -91,11 +91,13 @@ class MainViewModel @Inject constructor(
         selectedMovement = _movementDetail.value!![index]
     }
 
-    fun signUp(photo: Bitmap) {
-        _signUpState.value = SignUpStates.Loading
+    fun setPhoto(photo: Bitmap){
         _photoTaken.value = photo
         _photoState.value = PhotoStates.Taken
+    }
 
+    fun signUp(photo: Bitmap) {
+        _signUpState.value = SignUpStates.Loading
         uploadPhotoUseCase(email = userInformation.email, photo)
             .addOnSuccessListener {
                 it.storage.downloadUrl.addOnSuccessListener { uri ->

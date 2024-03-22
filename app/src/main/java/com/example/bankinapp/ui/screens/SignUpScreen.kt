@@ -9,7 +9,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -37,6 +37,7 @@ import com.example.bankinapp.ui.components.TextFieldType.PASSWORD
 import com.example.bankinapp.ui.navigation.Screen
 import com.example.bankinapp.ui.states.InputTextState
 import com.example.bankinapp.ui.theme.BrightPurple
+import com.example.bankinapp.ui.theme.Dimen100dp
 import com.example.bankinapp.ui.theme.Dimen10dp
 import com.example.bankinapp.ui.theme.Dimen20dp
 import com.example.bankinapp.ui.theme.Dimen40dp
@@ -82,7 +83,7 @@ fun SignUpScreen(
                     .clickable {
                         navController.popBackStack()
                     },
-                imageVector = Icons.Filled.ArrowBack,
+                imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                 contentDescription = "",
                 tint = Color.White
             )
@@ -156,7 +157,7 @@ fun SignUpScreen(
 
         Button(
             modifier = Modifier
-                .padding(top = Dimen10dp, start = Dimen40dp, end = Dimen40dp)
+                .padding(top = Dimen100dp, start = Dimen40dp, end = Dimen40dp)
                 .fillMaxWidth()
                 .height(Dimen50dp)
                 .testTag(COMPLETE_SIGN_UP_BUTTON),

@@ -10,6 +10,7 @@ import com.example.bankinapp.ui.screens.HomeScreen
 import com.example.bankinapp.ui.screens.LoginScreen
 import com.example.bankinapp.ui.screens.PhotoScreen
 import com.example.bankinapp.ui.screens.SignUpScreen
+import com.example.bankinapp.ui.screens.SuccessScreen
 import com.example.bankinapp.ui.screens.TransactionDetailScreen
 import com.example.bankinapp.ui.viewmodel.MainViewModel
 
@@ -41,6 +42,10 @@ fun AppNavigation(
                 viewModel = viewModel,
                 navController = navController
             )
+        }
+
+        composable(Screen.Success.route) {
+            SuccessScreen(navController = navController)
         }
 
         composable(Screen.Home.route) {
