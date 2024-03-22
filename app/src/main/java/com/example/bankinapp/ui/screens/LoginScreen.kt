@@ -34,7 +34,7 @@ import com.example.bankinapp.ui.components.CustomInputField
 import com.example.bankinapp.ui.components.TextFieldType
 import com.example.bankinapp.ui.navigation.Screen
 import com.example.bankinapp.ui.states.LoginUiStates
-import com.example.bankinapp.ui.theme.BrightPurple
+import com.example.bankinapp.ui.theme.DarkBlue
 import com.example.bankinapp.ui.theme.Dimen100dp
 import com.example.bankinapp.ui.theme.Dimen10dp
 import com.example.bankinapp.ui.theme.Dimen200dp
@@ -43,9 +43,10 @@ import com.example.bankinapp.ui.theme.Dimen40dp
 import com.example.bankinapp.ui.theme.Dimen50dp
 import com.example.bankinapp.ui.theme.Font20sp
 import com.example.bankinapp.ui.theme.GrayDisableText
-import com.example.bankinapp.ui.theme.Purple40
-import com.example.bankinapp.ui.theme.Purple80
-import com.example.bankinapp.ui.theme.White
+import com.example.bankinapp.ui.theme.LightBlue
+import com.example.bankinapp.ui.theme.LoginBackground
+import com.example.bankinapp.ui.theme.MediumLightBlue
+import com.example.bankinapp.ui.theme.WhiteText
 import com.example.bankinapp.ui.viewmodel.MainViewModel
 import com.example.bankinapp.util.TestTags.SIGN_UP_BUTTON
 
@@ -67,13 +68,13 @@ fun LoginScreen(viewModel: MainViewModel, navController: NavController) {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(White)
+            .background(LoginBackground)
     ) {
         Column(
             Modifier
                 .fillMaxSize()
                 .align(Alignment.Center)
-                .background(White)
+                .background(LoginBackground)
         ) {
             Image(
                 modifier = Modifier
@@ -81,7 +82,7 @@ fun LoginScreen(viewModel: MainViewModel, navController: NavController) {
                     .padding(top = Dimen50dp, bottom = Dimen10dp)
                     .width(Dimen200dp)
                     .height(Dimen200dp),
-                painter = painterResource(id = R.drawable.bank_svg),
+                painter = painterResource(id = R.drawable.bank_logo),
                 contentDescription = "welcome icon"
             )
 
@@ -89,7 +90,7 @@ fun LoginScreen(viewModel: MainViewModel, navController: NavController) {
                 stringResource(id = R.string.login_screen_email_hint),
                 textFieldType = TextFieldType.EMAIL,
                 modifier = Modifier.padding(bottom = Dimen10dp, top = Dimen20dp),
-                backgroundColor = Purple80,
+                backgroundColor = MediumLightBlue,
                 imageResource = R.drawable.ic_user,
                 isValidEmail = { isEmailValid.value = it }
             ) { email.value = it }
@@ -98,7 +99,7 @@ fun LoginScreen(viewModel: MainViewModel, navController: NavController) {
                 stringResource(id = R.string.login_screen_password_hint),
                 textFieldType = TextFieldType.PASSWORD,
                 modifier = Modifier.padding(bottom = Dimen40dp),
-                Purple80,
+                backgroundColor = MediumLightBlue,
                 imageResource = R.drawable.ic_password
             ) { password.value = it }
 
@@ -112,8 +113,8 @@ fun LoginScreen(viewModel: MainViewModel, navController: NavController) {
                 },
                 shape = CircleShape,
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = Purple40,
-                    contentColor = Color.White,
+                    containerColor = LightBlue,
+                    contentColor = WhiteText,
                     disabledContainerColor = Color.LightGray,
                     disabledContentColor = GrayDisableText
                 ),
@@ -136,7 +137,7 @@ fun LoginScreen(viewModel: MainViewModel, navController: NavController) {
                 },
                 shape = CircleShape,
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = BrightPurple,
+                    containerColor = DarkBlue,
                     contentColor = Color.White
                 )
             ) {
@@ -153,7 +154,7 @@ fun LoginScreen(viewModel: MainViewModel, navController: NavController) {
                     modifier = Modifier
                         .align(Alignment.Center)
                         .size(Dimen100dp, Dimen100dp),
-                    color = BrightPurple,
+                    color = DarkBlue,
                     strokeWidth = Dimen10dp
                 )
             }

@@ -28,13 +28,12 @@ import com.example.bankinapp.R
 import com.example.bankinapp.ui.components.TextFieldType.EMAIL
 import com.example.bankinapp.ui.components.TextFieldType.NORMAL
 import com.example.bankinapp.ui.components.TextFieldType.PASSWORD
-import com.example.bankinapp.ui.theme.BrightPurple
 import com.example.bankinapp.ui.theme.Dimen10dp
 import com.example.bankinapp.ui.theme.Dimen20dp
 import com.example.bankinapp.ui.theme.Dimen40dp
 import com.example.bankinapp.ui.theme.Dimen5dp
 import com.example.bankinapp.ui.theme.Dimen8dp
-import com.example.bankinapp.ui.theme.Pink40
+import com.example.bankinapp.ui.theme.WhiteText
 import com.example.bankinapp.util.EmailHelper
 
 @Composable
@@ -70,7 +69,8 @@ fun CustomInputField(
         painterResource(id = R.drawable.ic_disable_visibility)
     }
 
-    val color = if (isEmailValid) Pink40 else Color.Red
+    val color = if (isEmailValid) WhiteText else Color.Red
+
     Column(
         modifier
             .padding(top = Dimen5dp, start = Dimen20dp)
@@ -80,8 +80,8 @@ fun CustomInputField(
         Row {
             Image(
                 painter = painterResource(id = imageResource),
-                contentDescription = "editext icon",
-                modifier = modifier.align(Alignment.CenterVertically)
+                contentDescription = "edittext icon",
+                modifier = Modifier.align(Alignment.CenterVertically)
             )
 
             TextField(
@@ -133,7 +133,7 @@ fun CustomInputField(
                             Icon(
                                 painter = icon,
                                 contentDescription = "password visibility icon",
-                                tint = BrightPurple
+                                tint = WhiteText
                             )
                         }
                     }
