@@ -72,6 +72,9 @@ dependencies {
     // Lottie
     implementation("com.airbnb.android:lottie-compose:6.4.0")
 
+    // Coil
+    implementation("io.coil-kt:coil-compose:2.6.0")
+
     // Gson
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
 

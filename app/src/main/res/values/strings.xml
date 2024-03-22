@@ -32,6 +32,20 @@
     <!-- Take Photo Screen Area-->
     <string name="take_photo_screen_title">TAKE A PHOTO</string>
     <string name="take_photo_disclaimer">Lastly we need a picture of your ID</string>
-
     <!-- End of Take Photo Screen Area-->
+
+    <!-- Home Screen Area-->
+    <string name="home_screen_greeting">Welcome! \n\n%s %s</string>
+    <string name="home_screen_email">Email: %s</string>
+    <string name="home_screen_movements">Movements</string>
+    <string name="home_screen_empty_movements_label">There are no movements yet!</string>
+    <!-- End Home Screen Area-->
+
+    <!-- Detail Screen Area-->
+    <string name="detail_screen_amount">$ %s</string>
+    <string name="detail_screen_title">Transaction Details</string>
+    <string name="detail_screen_date">Date: </string>
+    <string name="detail_screen_description">Description: </string>
+    <string name="detail_screen_amount_label">Amount: $ </string>
+    <!-- End Detail Screen Area-->
 </resources>

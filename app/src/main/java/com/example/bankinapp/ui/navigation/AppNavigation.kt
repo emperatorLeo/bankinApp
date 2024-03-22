@@ -53,7 +53,7 @@ fun AppNavigation(
         }
 
         composable(Screen.TransactionDetail.route) {
-            TransactionDetailScreen(viewModel = viewModel)
+            TransactionDetailScreen(viewModel = viewModel, navController = navController)
         }
     }
 }

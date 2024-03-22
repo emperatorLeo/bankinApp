@@ -84,7 +84,7 @@ class MainViewModel @Inject constructor(
         this.userInformation = userInformation
     }
 
-    fun getUserData() = _user.value
+    fun getUserData() = _user.value!!
     fun getMovementDetail() = _movementDetail.value
 
     fun selectMovement(index: Int) {

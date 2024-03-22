@@ -162,7 +162,7 @@ fun LoginScreen(viewModel: MainViewModel, navController: NavController) {
                 Toast.makeText(
                     LocalContext.current,
                     stringResource(id = R.string.login_screen_error_text),
-                    Toast.LENGTH_LONG
+                    Toast.LENGTH_SHORT
                 ).show()
             }
 
