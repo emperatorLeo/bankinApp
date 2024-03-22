@@ -40,7 +40,6 @@ import com.example.bankinapp.ui.components.TextFieldType.EMAIL
 import com.example.bankinapp.ui.components.TextFieldType.PASSWORD
 import com.example.bankinapp.ui.navigation.Screen
 import com.example.bankinapp.ui.states.InputTextState
-import com.example.bankinapp.ui.theme.BrightPurple
 import com.example.bankinapp.ui.theme.DarkBlue
 import com.example.bankinapp.ui.theme.Dimen100dp
 import com.example.bankinapp.ui.theme.Dimen10dp
@@ -175,7 +174,7 @@ fun SignUpScreen(
             },
             shape = CircleShape,
             colors = ButtonDefaults.buttonColors(
-                containerColor = BrightPurple,
+                containerColor = LightBlue,
                 contentColor = Color.White,
                 disabledContainerColor = Color.LightGray,
                 disabledContentColor = GrayDisableText
