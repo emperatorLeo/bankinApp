@@ -1,10 +1,10 @@
 package com.example.bankinapp.ui.viewmodel
 
 import android.graphics.Bitmap
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.bankinapp.data.db.IMAGE_URL
 import com.example.bankinapp.data.db.LASTNAME
 import com.example.bankinapp.data.db.MOVEMENTS
 import com.example.bankinapp.data.db.NAME
@@ -18,6 +18,7 @@ import com.example.bankinapp.ui.states.PhotoStates
 import com.example.bankinapp.ui.states.SignUpStates
 import com.example.bankinapp.usecase.LoginUseCase
 import com.example.bankinapp.usecase.SignUpUseCase
+import com.example.bankinapp.usecase.UploadPhotoUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -27,7 +28,8 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val loginUseCase: LoginUseCase,
-    private val signUpUseCase: SignUpUseCase
+    private val signUpUseCase: SignUpUseCase,
+    private val uploadPhotoUseCase: UploadPhotoUseCase
 ) : ViewModel() {
 
     private val _loginUiStates = MutableStateFlow<LoginUiStates>(LoginUiStates.Idle)
@@ -53,13 +55,11 @@ class MainViewModel @Inject constructor(
         loginUseCase(email, password)
             .addOnSuccessListener {
                 if (it.data == null || it.get(PASSWORD) != password) {
-                    Log.e("Leo", "viewModel wrongCredentials")
                     _loginUiStates.value = LoginUiStates.WrongCredentials
                 } else {
                     _loginUiStates.value = LoginUiStates.Success
                     val movementsRaw = it.get(MOVEMENTS) as ArrayList<HashMap<String, Any>>
                     _movementDetail.value = fromHashMapToMovements(movementsRaw)
-
                     _user.value =
                         Pair(
                             email,
@@ -69,6 +69,7 @@ class MainViewModel @Inject constructor(
                                     LASTNAME
                                 ) as String,
                                 password = it.get(PASSWORD) as String,
+                                imageUrl = it.get(IMAGE_URL) as String,
                                 movements = arrayListOf()
                             )
                         )
@@ -91,12 +92,24 @@ class MainViewModel @Inject constructor(
     }
 
     fun signUp(photo: Bitmap) {
+        _signUpState.value = SignUpStates.Loading
         _photoTaken.value = photo
         _photoState.value = PhotoStates.Taken
 
+        uploadPhotoUseCase(email = userInformation.email, photo)
+            .addOnSuccessListener {
+                it.storage.downloadUrl.addOnSuccessListener { uri ->
+                    savingUser(uri.toString())
+                }
+            }
+            .addOnFailureListener {
+                _signUpState.value = SignUpStates.Failure
+            }
+    }
+
+    private fun savingUser(imageUrl: String) {
         with(userInformation) {
-            _signUpState.value = SignUpStates.Loading
-            signUpUseCase(email, UserDataEntity(name, surname, password, arrayListOf()))
+            signUpUseCase(email, UserDataEntity(name, surname, password, imageUrl, arrayListOf()))
                 .addOnSuccessListener {
                     _signUpState.value = SignUpStates.Success
                 }

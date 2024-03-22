@@ -6,9 +6,14 @@ import com.example.bankinapp.domain.DataBaseSource
 import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.StorageReference
+import com.google.firebase.storage.UploadTask
 import javax.inject.Inject
 
-class DataBaseSourceImp @Inject constructor(private val db: FirebaseFirestore) : DataBaseSource {
+class DataBaseSourceImp @Inject constructor(
+    private val db: FirebaseFirestore,
+    private val storageRef: StorageReference
+) : DataBaseSource {
 
     override fun login(email: String, password: String): Task<DocumentSnapshot> {
         return db.collection(COLLECTION).document(email)
@@ -22,7 +27,13 @@ class DataBaseSourceImp @Inject constructor(private val db: FirebaseFirestore) :
                     NAME to userData.name,
                     LASTNAME to userData.lastName,
                     PASSWORD to userData.password,
+                    IMAGE_URL to userData.imageUrl,
                     MOVEMENTS to arrayListOf<Movements>()
                 )
             )
+
+
+    override fun uploadPhoto(photoName: String, byteArray: ByteArray): UploadTask {
+        return storageRef.child(CHILD_REFERENCE).child(photoName).putBytes(byteArray)
+    }
 }

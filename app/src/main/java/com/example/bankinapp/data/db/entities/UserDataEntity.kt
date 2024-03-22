@@ -4,6 +4,7 @@ data class UserDataEntity(
     val name: String,
     val lastName: String,
     val password: String,
+    val imageUrl: String,
     val movements: ArrayList<Movements>
 )
 

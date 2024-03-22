@@ -27,8 +27,11 @@ object DataSourceModule {
 
     @Singleton
     @Provides
-    fun provideDataBaseSource(firebaseFireStore: FirebaseFirestore): DataBaseSource {
-        return DataBaseSourceImp(firebaseFireStore)
+    fun provideDataBaseSource(
+        firebaseFireStore: FirebaseFirestore,
+        storageReference: StorageReference
+    ): DataBaseSource {
+        return DataBaseSourceImp(firebaseFireStore, storageReference)
     }
 
     @Singleton
@@ -44,7 +47,7 @@ object DataSourceModule {
     }
 
     @Provides
-    fun provideStorageReference(firebaseStorage: FirebaseStorage):StorageReference{
-       return firebaseStorage.reference
+    fun provideStorageReference(firebaseStorage: FirebaseStorage): StorageReference {
+        return firebaseStorage.reference
     }
 }
