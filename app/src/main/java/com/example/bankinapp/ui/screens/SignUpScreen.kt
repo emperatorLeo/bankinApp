@@ -1,5 +1,6 @@
 package com.example.bankinapp.ui.screens
 
+import android.app.Activity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -18,11 +19,14 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -37,6 +41,7 @@ import com.example.bankinapp.ui.components.TextFieldType.PASSWORD
 import com.example.bankinapp.ui.navigation.Screen
 import com.example.bankinapp.ui.states.InputTextState
 import com.example.bankinapp.ui.theme.BrightPurple
+import com.example.bankinapp.ui.theme.DarkBlue
 import com.example.bankinapp.ui.theme.Dimen100dp
 import com.example.bankinapp.ui.theme.Dimen10dp
 import com.example.bankinapp.ui.theme.Dimen20dp
@@ -47,11 +52,9 @@ import com.example.bankinapp.ui.theme.Font15sp
 import com.example.bankinapp.ui.theme.Font20sp
 import com.example.bankinapp.ui.theme.Font30sp
 import com.example.bankinapp.ui.theme.GrayDisableText
-import com.example.bankinapp.ui.theme.Pink40
-import com.example.bankinapp.ui.theme.Purple40
-import com.example.bankinapp.ui.theme.Purple80
-import com.example.bankinapp.ui.theme.PurpleGrey80
-import com.example.bankinapp.ui.theme.White
+import com.example.bankinapp.ui.theme.LightBlue
+import com.example.bankinapp.ui.theme.MediumLightBlue
+import com.example.bankinapp.ui.theme.WhiteText
 import com.example.bankinapp.ui.viewmodel.MainViewModel
 import com.example.bankinapp.util.TestTags.COMPLETE_SIGN_UP_BUTTON
 
@@ -61,6 +64,11 @@ fun SignUpScreen(
     viewModel: MainViewModel,
     navController: NavController
 ) {
+   val context = LocalContext.current
+    SideEffect {
+        val window = ( context as Activity).window
+        window.statusBarColor = LightBlue.toArgb()
+    }
 
     val userInformation = remember {
         mutableStateOf(UserInformation.userEmpty)
@@ -73,7 +81,7 @@ fun SignUpScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(White)
+            .background(MediumLightBlue)
 
     ) {
         TopAppBar(title = { }, navigationIcon = {
@@ -87,7 +95,7 @@ fun SignUpScreen(
                 contentDescription = "",
                 tint = Color.White
             )
-        }, colors = TopAppBarDefaults.largeTopAppBarColors(containerColor = Purple80))
+        }, colors = TopAppBarDefaults.largeTopAppBarColors(containerColor = DarkBlue))
 
         Text(
             modifier = Modifier
@@ -95,7 +103,7 @@ fun SignUpScreen(
                 .align(Alignment.CenterHorizontally),
             fontWeight = FontWeight.Bold,
             text = stringResource(id = R.string.sign_up_screen_title),
-            color = Purple40,
+            color = WhiteText,
             fontSize = Font30sp,
             textAlign = TextAlign.Center
         )
@@ -106,7 +114,7 @@ fun SignUpScreen(
                 .align(Alignment.Start),
             fontWeight = FontWeight.SemiBold,
             text = stringResource(id = R.string.sign_up_screen_disclaimer),
-            color = Pink40,
+            color = WhiteText,
             fontSize = Font15sp,
             textAlign = TextAlign.Center
         )
@@ -115,7 +123,7 @@ fun SignUpScreen(
             label = stringResource(id = R.string.sign_up_screen_email_label),
             modifier = Modifier.padding(top = Dimen20dp, bottom = Dimen10dp),
             textFieldType = EMAIL,
-            backgroundColor = PurpleGrey80,
+            backgroundColor = LightBlue,
             imageResource = R.drawable.ic_email,
             isValidEmail = {
                 inputTextState.value = inputTextState.value.copy(isEmailOk = it)
@@ -126,7 +134,7 @@ fun SignUpScreen(
             label = stringResource(id = R.string.sign_up_screen_password_label),
             textFieldType = PASSWORD,
             modifier = Modifier.padding(bottom = Dimen10dp),
-            PurpleGrey80,
+            backgroundColor = LightBlue,
             imageResource = R.drawable.ic_password,
         ) {
             inputTextState.value = inputTextState.value.copy(isPasswordOk = it.isNotEmpty())
@@ -136,7 +144,7 @@ fun SignUpScreen(
         CustomInputField(
             label = stringResource(id = R.string.sign_up_screen_name_label),
             modifier = Modifier.padding(bottom = Dimen10dp),
-            backgroundColor = PurpleGrey80,
+            backgroundColor = LightBlue,
             imageResource = R.drawable.ic_user,
             minLengthAllowed = 3,
             reachMinAllowed = {
@@ -147,7 +155,7 @@ fun SignUpScreen(
         CustomInputField(
             label = stringResource(id = R.string.sign_up_screen_surname_label),
             modifier = Modifier.padding(bottom = Dimen10dp),
-            backgroundColor = PurpleGrey80,
+            backgroundColor = LightBlue,
             imageResource = R.drawable.ic_user,
             minLengthAllowed = 2,
             reachMinAllowed = {
