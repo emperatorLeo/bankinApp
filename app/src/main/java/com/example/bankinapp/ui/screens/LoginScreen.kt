@@ -20,7 +20,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -51,14 +51,14 @@ import com.example.bankinapp.util.TestTags.SIGN_UP_BUTTON
 
 @Composable
 fun LoginScreen(viewModel: MainViewModel, navController: NavController) {
-    val email = remember {
+    val email = rememberSaveable {
         mutableStateOf("")
     }
-    val password = remember {
+    val password = rememberSaveable {
         mutableStateOf("")
     }
 
-    val isEmailValid = remember {
+    val isEmailValid = rememberSaveable {
         mutableStateOf(false)
     }
 
@@ -164,6 +164,7 @@ fun LoginScreen(viewModel: MainViewModel, navController: NavController) {
                     stringResource(id = R.string.login_screen_error_text),
                     Toast.LENGTH_SHORT
                 ).show()
+                viewModel.resetState()
             }
 
             LoginUiStates.Success -> {
@@ -175,8 +176,9 @@ fun LoginScreen(viewModel: MainViewModel, navController: NavController) {
                 Toast.makeText(
                     LocalContext.current,
                     stringResource(id = R.string.login_screen_failure_text),
-                    Toast.LENGTH_LONG
+                    Toast.LENGTH_SHORT
                 ).show()
+                viewModel.resetState()
             }
 
             LoginUiStates.Idle -> {}

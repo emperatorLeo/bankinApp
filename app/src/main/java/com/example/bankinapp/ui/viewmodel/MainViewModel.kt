@@ -109,6 +109,10 @@ class MainViewModel @Inject constructor(
             }
     }
 
+    fun resetState(){
+        _loginUiStates.value = LoginUiStates.Idle
+    }
+
     private fun savingUser(imageUrl: String) {
         with(userInformation) {
             signUpUseCase(email, UserDataEntity(name, surname, password, imageUrl, arrayListOf()))
