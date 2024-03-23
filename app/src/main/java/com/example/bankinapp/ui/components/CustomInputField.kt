@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
@@ -22,11 +23,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import com.example.bankinapp.R
 import com.example.bankinapp.ui.components.TextFieldType.EMAIL
-import com.example.bankinapp.ui.components.TextFieldType.NORMAL
+import com.example.bankinapp.ui.components.TextFieldType.NAME
 import com.example.bankinapp.ui.components.TextFieldType.PASSWORD
 import com.example.bankinapp.ui.theme.Dimen10dp
 import com.example.bankinapp.ui.theme.Dimen20dp
@@ -39,7 +41,7 @@ import com.example.bankinapp.util.EmailHelper
 @Composable
 fun CustomInputField(
     label: String,
-    textFieldType: TextFieldType = NORMAL,
+    textFieldType: TextFieldType = NAME,
     modifier: Modifier,
     backgroundColor: Color,
     imageResource: Int,
@@ -52,7 +54,7 @@ fun CustomInputField(
         mutableStateOf("")
     }
     var visibility by rememberSaveable {
-        mutableStateOf(textFieldType == NORMAL || textFieldType == EMAIL)
+        mutableStateOf(textFieldType == NAME || textFieldType == EMAIL)
     }
 
     var isEmailValid by rememberSaveable {
@@ -88,6 +90,7 @@ fun CustomInputField(
                 modifier = Modifier
                     .padding(start = Dimen10dp)
                     .align(Alignment.CenterVertically),
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
                 colors = TextFieldDefaults.colors(
                     focusedTextColor = color,
                     focusedContainerColor = backgroundColor,
@@ -104,8 +107,18 @@ fun CustomInputField(
                 label = { Text(text = label, color = color) },
                 onValueChange = {
                     val currentText = it.trim()
-                    onValueChange(currentText)
-                    text = currentText
+                    text = if (textFieldType == NAME) {
+                        val filteredText = currentText.filter { char ->
+                            !char.isDigit()
+                        }
+                        onValueChange(filteredText)
+                        filteredText
+
+                    } else {
+                        onValueChange(currentText)
+                        currentText
+                    }
+
                     if (currentText.isNotEmpty()) {
                         if (textFieldType == EMAIL) {
                             isEmailValid = EmailHelper.isEmailValid(currentText)
@@ -113,13 +126,14 @@ fun CustomInputField(
                         } else {
                             isEmailValid = true
                         }
-                        reachMinCharAllowed = if (textFieldType == NORMAL && minLengthAllowed != 0 && currentText.length < minLengthAllowed){
-                            reachMinAllowed(false)
-                            false
-                        }else {
-                            reachMinAllowed(true)
-                            true
-                        }
+                        reachMinCharAllowed =
+                            if (textFieldType == NAME && minLengthAllowed != 0 && currentText.length < minLengthAllowed) {
+                                reachMinAllowed(false)
+                                false
+                            } else {
+                                reachMinAllowed(true)
+                                true
+                            }
                     } else {
                         isEmailValid = true
                         reachMinCharAllowed = true
@@ -151,7 +165,7 @@ fun CustomInputField(
                 text = stringResource(id = R.string.component_email_format_error),
                 color = Color.Red
             )
-        if (textFieldType == NORMAL && !reachMinCharAllowed)
+        if (textFieldType == NAME && !reachMinCharAllowed)
             Text(
                 modifier = Modifier.padding(start = Dimen40dp),
                 text = stringResource(id = R.string.component_min_limit_error, minLengthAllowed),
@@ -161,7 +175,7 @@ fun CustomInputField(
 }
 
 enum class TextFieldType {
-    NORMAL, PASSWORD, EMAIL
+    NAME, PASSWORD, EMAIL
 }
 
 

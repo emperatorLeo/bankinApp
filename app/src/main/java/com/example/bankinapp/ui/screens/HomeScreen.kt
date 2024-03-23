@@ -21,29 +21,26 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.example.bankinapp.R
 import com.example.bankinapp.ui.listitem.MovementItemList
 import com.example.bankinapp.ui.navigation.Screen
-import com.example.bankinapp.ui.theme.BrightPurple
+import com.example.bankinapp.ui.theme.DarkBlue
 import com.example.bankinapp.ui.theme.Dimen100dp
 import com.example.bankinapp.ui.theme.Dimen10dp
 import com.example.bankinapp.ui.theme.Dimen15dp
-import com.example.bankinapp.ui.theme.Dimen1dp
 import com.example.bankinapp.ui.theme.Dimen20dp
 import com.example.bankinapp.ui.theme.Dimen30dp
 import com.example.bankinapp.ui.theme.Dimen50dp
 import com.example.bankinapp.ui.theme.Dimen5dp
+import com.example.bankinapp.ui.theme.Dimen8dp
 import com.example.bankinapp.ui.theme.Font20sp
 import com.example.bankinapp.ui.theme.Font30sp
-import com.example.bankinapp.ui.theme.Purple40
-import com.example.bankinapp.ui.theme.Purple80
+import com.example.bankinapp.ui.theme.LightBlue
 import com.example.bankinapp.ui.theme.PurpleGrey40
 import com.example.bankinapp.ui.theme.PurpleGrey80
-import com.example.bankinapp.ui.theme.White
+import com.example.bankinapp.ui.theme.WhiteText
 import com.example.bankinapp.ui.viewmodel.MainViewModel
 
 @Composable
@@ -51,11 +48,12 @@ fun HomeScreen(viewModel: MainViewModel, navController: NavController) {
     val email = viewModel.getUserData().first
     val userData = viewModel.getUserData().second
     val movements = viewModel.getMovementDetail()
+    viewModel.resetState()
 
     Column(
         Modifier
             .fillMaxSize()
-            .background(White)
+            .background(DarkBlue)
 
     ) {
 
@@ -64,11 +62,11 @@ fun HomeScreen(viewModel: MainViewModel, navController: NavController) {
                 .padding(end = Dimen10dp, top = Dimen10dp)
                 .align(Alignment.End),
             onClick = {
-                navController.popBackStack()
+                navController.popBackStack(Screen.Login.route,false)
             },
             colors = ButtonColors(
-                containerColor = Purple80,
-                contentColor = Purple40,
+                containerColor = LightBlue,
+                contentColor = LightBlue,
                 disabledContentColor = PurpleGrey40,
                 disabledContainerColor = PurpleGrey80
             )
@@ -76,7 +74,7 @@ fun HomeScreen(viewModel: MainViewModel, navController: NavController) {
             Icon(
                 imageVector = Icons.AutoMirrored.Filled.Logout,
                 contentDescription = "",
-                tint = Purple40
+                tint = WhiteText
             )
         }
 
@@ -90,7 +88,7 @@ fun HomeScreen(viewModel: MainViewModel, navController: NavController) {
                 userData.name,
                 userData.lastName
             ),
-            color = Purple40,
+            color = WhiteText,
             fontSize = Font30sp,
             textAlign = TextAlign.Center
         )
@@ -101,7 +99,7 @@ fun HomeScreen(viewModel: MainViewModel, navController: NavController) {
                 .align(Alignment.CenterHorizontally),
             fontWeight = FontWeight.Bold,
             text = email,
-            color = Purple40,
+            color = WhiteText,
             fontSize = Font20sp,
             textAlign = TextAlign.Center
         )
@@ -122,16 +120,15 @@ fun HomeScreen(viewModel: MainViewModel, navController: NavController) {
                 .align(Alignment.CenterHorizontally),
             fontWeight = FontWeight.Normal,
             text = stringResource(id = R.string.home_screen_movements),
-            color = Purple40,
+            color = WhiteText,
             fontSize = Font20sp,
             textAlign = TextAlign.Center
         )
 
         HorizontalDivider(
             Modifier
-                .padding(horizontal = Dimen1dp)
-                .fillMaxWidth(),
-            color = Purple40
+                .padding(start = Dimen8dp, end = Dimen8dp, bottom = Dimen30dp),
+            color = LightBlue
         )
 
         if (movements!!.isEmpty()) {
@@ -140,14 +137,14 @@ fun HomeScreen(viewModel: MainViewModel, navController: NavController) {
                 modifier = Modifier
                     .padding(top = Dimen30dp, start = Dimen20dp, end = Dimen10dp)
                     .align(Alignment.CenterHorizontally),
-                color = BrightPurple,
+                color = WhiteText,
                 fontWeight = FontWeight.Bold,
-                fontSize = 20.sp
+                fontSize = Font20sp
             )
         } else {
             LazyColumn(
                 modifier = Modifier
-                    .padding(top = 10.dp)
+                    .padding(top = Dimen10dp)
                     .fillMaxWidth()
             ) {
                 itemsIndexed(movements.toList()) { index, movement ->

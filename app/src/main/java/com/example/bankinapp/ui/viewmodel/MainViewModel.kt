@@ -44,8 +44,8 @@ class MainViewModel @Inject constructor(
     private val _photoState = MutableStateFlow<PhotoStates>(PhotoStates.Idle)
     val photoState: StateFlow<PhotoStates> = _photoState.asStateFlow()
 
-    private val _photoTaken = MutableLiveData<Bitmap>()
-    val photoTaken: LiveData<Bitmap> = _photoTaken
+    private val _photoTaken = MutableLiveData<Bitmap?>()
+    val photoTaken: LiveData<Bitmap?> = _photoTaken
 
     private lateinit var userInformation: UserInformation
 
@@ -81,6 +81,9 @@ class MainViewModel @Inject constructor(
     }
 
     fun setUserInformation(userInformation: UserInformation) {
+        _photoTaken.value = null
+        _photoState.value = PhotoStates.Idle
+        _signUpState.value = SignUpStates.Idle
         this.userInformation = userInformation
     }
 

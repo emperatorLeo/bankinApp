@@ -1,5 +1,6 @@
 package com.example.bankinapp.ui.navigation
 
+import android.annotation.SuppressLint
 import androidx.camera.view.LifecycleCameraController
 import androidx.compose.runtime.Composable
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -14,6 +15,7 @@ import com.example.bankinapp.ui.screens.SuccessScreen
 import com.example.bankinapp.ui.screens.TransactionDetailScreen
 import com.example.bankinapp.ui.viewmodel.MainViewModel
 
+@SuppressLint("RestrictedApi")
 @Composable
 fun AppNavigation(
     viewModel: MainViewModel = viewModel(),
@@ -25,6 +27,7 @@ fun AppNavigation(
         navController = navController,
         startDestination = Screen.Login.route
     ) {
+
         composable(Screen.Login.route) {
             LoginScreen(viewModel = viewModel, navController)
         }

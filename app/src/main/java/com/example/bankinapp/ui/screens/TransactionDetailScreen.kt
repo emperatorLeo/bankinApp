@@ -17,13 +17,13 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.navigation.NavController
 import com.example.bankinapp.R
+import com.example.bankinapp.ui.theme.DarkBlue
 import com.example.bankinapp.ui.theme.Dimen100dp
 import com.example.bankinapp.ui.theme.Dimen15dp
 import com.example.bankinapp.ui.theme.Dimen20dp
@@ -32,22 +32,18 @@ import com.example.bankinapp.ui.theme.Dimen50dp
 import com.example.bankinapp.ui.theme.Dimen5dp
 import com.example.bankinapp.ui.theme.Font20sp
 import com.example.bankinapp.ui.theme.Font30sp
-import com.example.bankinapp.ui.theme.GreenPositive
-import com.example.bankinapp.ui.theme.Purple40
-import com.example.bankinapp.ui.theme.Purple80
-import com.example.bankinapp.ui.theme.RedNegative
+import com.example.bankinapp.ui.theme.WhiteText
 import com.example.bankinapp.ui.viewmodel.MainViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TransactionDetailScreen(viewModel: MainViewModel, navController: NavController) {
     val selectedMovement = viewModel.selectedMovement
-    val color = if (selectedMovement.amount < 0) RedNegative else GreenPositive
 
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.White)
+            .background(DarkBlue)
     ) {
         TopAppBar(title = { }, navigationIcon = {
             Icon(
@@ -58,16 +54,16 @@ fun TransactionDetailScreen(viewModel: MainViewModel, navController: NavControll
                     },
                 imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                 contentDescription = "",
-                tint = Color.White
+                tint = WhiteText
             )
-        }, colors = TopAppBarDefaults.largeTopAppBarColors(containerColor = Purple80))
+        }, colors = TopAppBarDefaults.largeTopAppBarColors(containerColor = DarkBlue))
         Text(
             modifier = Modifier
                 .padding(top = Dimen100dp, bottom = Dimen30dp)
                 .align(Alignment.CenterHorizontally),
             fontWeight = FontWeight.Bold,
             text = stringResource(id = R.string.detail_screen_title),
-            color = Purple40,
+            color = WhiteText,
             fontSize = Font30sp,
             textAlign = TextAlign.Center
         )
@@ -86,7 +82,7 @@ fun TransactionDetailScreen(viewModel: MainViewModel, navController: NavControll
                     .align(Alignment.CenterVertically),
                 fontWeight = FontWeight.Bold,
                 text = stringResource(id = R.string.detail_screen_date),
-                color = Purple40,
+                color = WhiteText,
                 fontSize = Font20sp,
                 textAlign = TextAlign.Center
             )
@@ -96,29 +92,30 @@ fun TransactionDetailScreen(viewModel: MainViewModel, navController: NavControll
                     .align(Alignment.CenterVertically),
                 fontWeight = FontWeight.Normal,
                 text = selectedMovement.date,
-                color = Purple40,
+                color = WhiteText,
                 fontSize = Font20sp,
                 textAlign = TextAlign.Center
             )
         }
 
-        Row(Modifier.padding(top = Dimen50dp, start = Dimen15dp)) {
+        Column(Modifier.padding(top = Dimen50dp, start = Dimen15dp)) {
             Text(
                 modifier = Modifier
-                    .align(Alignment.CenterVertically),
+                    .align(Alignment.Start),
                 fontWeight = FontWeight.Bold,
                 text = stringResource(id = R.string.detail_screen_description),
-                color = Purple40,
+                color = WhiteText,
                 fontSize = Font20sp,
                 textAlign = TextAlign.Center
             )
 
             Text(
                 modifier = Modifier
-                    .align(Alignment.CenterVertically),
+                    .padding(Dimen5dp)
+                    .align(Alignment.Start),
                 fontWeight = FontWeight.Normal,
                 text = selectedMovement.description,
-                color = Purple40,
+                color = WhiteText,
                 fontSize = Font20sp,
                 textAlign = TextAlign.Center
             )
@@ -130,7 +127,7 @@ fun TransactionDetailScreen(viewModel: MainViewModel, navController: NavControll
                     .align(Alignment.CenterVertically),
                 fontWeight = FontWeight.Bold,
                 text = stringResource(id = R.string.detail_screen_amount_label),
-                color = Purple40,
+                color = WhiteText,
                 fontSize = Font20sp,
                 textAlign = TextAlign.Center
             )
@@ -140,7 +137,7 @@ fun TransactionDetailScreen(viewModel: MainViewModel, navController: NavControll
                     .align(Alignment.CenterVertically),
                 fontWeight = FontWeight.Normal,
                 text = selectedMovement.amount.toString(),
-                color = color,
+                color = WhiteText,
                 fontSize = Font20sp,
                 textAlign = TextAlign.Center
             )

@@ -34,7 +34,6 @@ import com.example.bankinapp.ui.components.CustomInputField
 import com.example.bankinapp.ui.components.TextFieldType
 import com.example.bankinapp.ui.navigation.Screen
 import com.example.bankinapp.ui.states.LoginUiStates
-import com.example.bankinapp.ui.theme.DarkBlue
 import com.example.bankinapp.ui.theme.Dimen100dp
 import com.example.bankinapp.ui.theme.Dimen10dp
 import com.example.bankinapp.ui.theme.Dimen200dp
@@ -52,6 +51,7 @@ import com.example.bankinapp.util.TestTags.SIGN_UP_BUTTON
 
 @Composable
 fun LoginScreen(viewModel: MainViewModel, navController: NavController) {
+
     val email = rememberSaveable {
         mutableStateOf("")
     }
@@ -154,7 +154,7 @@ fun LoginScreen(viewModel: MainViewModel, navController: NavController) {
                     modifier = Modifier
                         .align(Alignment.Center)
                         .size(Dimen100dp, Dimen100dp),
-                    color = DarkBlue,
+                    color = LightBlue,
                     strokeWidth = Dimen10dp
                 )
             }
@@ -169,7 +169,6 @@ fun LoginScreen(viewModel: MainViewModel, navController: NavController) {
             }
 
             LoginUiStates.Success -> {
-                navController.popBackStack()
                 navController.navigate(Screen.Home.route)
             }
 

@@ -22,6 +22,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -37,6 +38,7 @@ import com.example.bankinapp.R
 import com.example.bankinapp.model.UserInformation
 import com.example.bankinapp.ui.components.CustomInputField
 import com.example.bankinapp.ui.components.TextFieldType.EMAIL
+import com.example.bankinapp.ui.components.TextFieldType.NAME
 import com.example.bankinapp.ui.components.TextFieldType.PASSWORD
 import com.example.bankinapp.ui.navigation.Screen
 import com.example.bankinapp.ui.states.InputTextState
@@ -73,7 +75,7 @@ fun SignUpScreen(
         mutableStateOf(UserInformation.userEmpty)
     }
 
-    val inputTextState = remember {
+    val inputTextState = rememberSaveable(InputTextState.idle) {
         mutableStateOf(InputTextState.idle)
     }
 
@@ -145,6 +147,7 @@ fun SignUpScreen(
             modifier = Modifier.padding(bottom = Dimen10dp),
             backgroundColor = LightBlue,
             imageResource = R.drawable.ic_user,
+            textFieldType = NAME,
             minLengthAllowed = 3,
             reachMinAllowed = {
                 inputTextState.value = inputTextState.value.copy(isNameOk = it)
@@ -156,6 +159,7 @@ fun SignUpScreen(
             modifier = Modifier.padding(bottom = Dimen10dp),
             backgroundColor = LightBlue,
             imageResource = R.drawable.ic_user,
+            textFieldType = NAME,
             minLengthAllowed = 2,
             reachMinAllowed = {
                 inputTextState.value = inputTextState.value.copy(isSurnameOk = it)
