@@ -16,9 +16,9 @@ import com.example.bankinapp.model.UserInformation
 import com.example.bankinapp.ui.states.LoginUiStates
 import com.example.bankinapp.ui.states.PhotoStates
 import com.example.bankinapp.ui.states.SignUpStates
-import com.example.bankinapp.usecase.LoginUseCase
-import com.example.bankinapp.usecase.SignUpUseCase
-import com.example.bankinapp.usecase.UploadPhotoUseCase
+import com.example.bankinapp.usecase.login.LoginUseCase
+import com.example.bankinapp.usecase.photo.UploadPhotoUseCase
+import com.example.bankinapp.usecase.signUp.SignUpUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
