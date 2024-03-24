@@ -1,7 +1,7 @@
 package com.example.bankinapp.data.db
 
 import com.example.bankinapp.data.db.entities.Movements
-import com.example.bankinapp.data.db.entities.UserDataEntity
+import com.example.bankinapp.data.db.entities.UserDataDTO
 import com.example.bankinapp.domain.DataBaseSource
 import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.DocumentSnapshot
@@ -20,7 +20,7 @@ class DataBaseSourceImp @Inject constructor(
             .get()
     }
 
-    override fun signUp(email: String, userData: UserDataEntity) =
+    override fun signUp(email: String, userData: UserDataDTO) =
         db.collection(COLLECTION).document(email)
             .set(
                 hashMapOf(

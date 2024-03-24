@@ -1,6 +1,6 @@
 package com.example.bankinapp.data.db.entities
 
-data class UserDataEntity(
+data class UserDataDTO(
     val name: String,
     val lastName: String,
     val password: String,

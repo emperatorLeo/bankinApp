@@ -1,6 +1,6 @@
 package com.example.bankinapp.data
 
-import com.example.bankinapp.data.db.entities.UserDataEntity
+import com.example.bankinapp.data.db.entities.UserDataDTO
 import com.example.bankinapp.domain.DataBaseSource
 import com.example.bankinapp.domain.Repository
 import com.google.android.gms.tasks.Task
@@ -11,7 +11,7 @@ class RepositoryImp(private val dataBaseSource: DataBaseSource) : Repository {
         return dataBaseSource.login(email = email, password = password)
     }
 
-    override fun signUp(email: String, userData: UserDataEntity) =
+    override fun signUp(email: String, userData: UserDataDTO) =
         dataBaseSource.signUp(email, userData)
 
     override fun uploadPhoto(photoName: String, byteArray: ByteArray) =

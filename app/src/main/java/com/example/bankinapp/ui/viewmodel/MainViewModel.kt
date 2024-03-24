@@ -10,7 +10,7 @@ import com.example.bankinapp.data.db.MOVEMENTS
 import com.example.bankinapp.data.db.NAME
 import com.example.bankinapp.data.db.PASSWORD
 import com.example.bankinapp.data.db.entities.Movements
-import com.example.bankinapp.data.db.entities.UserDataEntity
+import com.example.bankinapp.data.db.entities.UserDataDTO
 import com.example.bankinapp.data.db.entities.fromHashMapToMovements
 import com.example.bankinapp.model.UserInformation
 import com.example.bankinapp.ui.states.LoginUiStates
@@ -37,7 +37,7 @@ class MainViewModel @Inject constructor(
     private val _signUpState = MutableStateFlow<SignUpStates>(SignUpStates.Idle)
     val signUpStates: StateFlow<SignUpStates> = _signUpState.asStateFlow()
 
-    private val _user = MutableLiveData<Pair<String, UserDataEntity>>()
+    private val _user = MutableLiveData<Pair<String, UserDataDTO>>()
     private val _movementDetail = MutableLiveData<ArrayList<Movements>>(arrayListOf())
     lateinit var selectedMovement: Movements
 
@@ -63,7 +63,7 @@ class MainViewModel @Inject constructor(
                     _user.value =
                         Pair(
                             email,
-                            UserDataEntity(
+                            UserDataDTO(
                                 name = it.get(NAME) as String,
                                 lastName = it.get(
                                     LASTNAME
@@ -118,7 +118,7 @@ class MainViewModel @Inject constructor(
 
     private fun savingUser(imageUrl: String) {
         with(userInformation) {
-            signUpUseCase(email, UserDataEntity(name, surname, password, imageUrl, arrayListOf()))
+            signUpUseCase(email, UserDataDTO(name, surname, password, imageUrl, arrayListOf()))
                 .addOnSuccessListener {
                     _signUpState.value = SignUpStates.Success
                 }
