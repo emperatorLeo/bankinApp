@@ -47,7 +47,7 @@ import com.example.bankinapp.ui.viewmodel.MainViewModel
 fun HomeScreen(viewModel: MainViewModel, navController: NavController) {
     val email = viewModel.getUserData().first
     val userData = viewModel.getUserData().second
-    val movements = viewModel.getMovementDetail()
+    val movements = userData.movements
     viewModel.resetState()
 
     Column(
@@ -131,7 +131,7 @@ fun HomeScreen(viewModel: MainViewModel, navController: NavController) {
             color = LightBlue
         )
 
-        if (movements!!.isEmpty()) {
+        if (movements.isEmpty()) {
             Text(
                 text = stringResource(id = R.string.home_screen_empty_movements_label),
                 modifier = Modifier

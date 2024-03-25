@@ -38,7 +38,7 @@ class MainViewModel @Inject constructor(
     val signUpStates: StateFlow<SignUpStates> = _signUpState.asStateFlow()
 
     private val _user = MutableLiveData<Pair<String, UserDataDTO>>()
-    private val _movementDetail = MutableLiveData<ArrayList<Movements>>(arrayListOf())
+    private var movementDetailList = ArrayList<Movements>(arrayListOf())
     lateinit var selectedMovement: Movements
 
     private val _photoState = MutableStateFlow<PhotoStates>(PhotoStates.Idle)
@@ -59,7 +59,7 @@ class MainViewModel @Inject constructor(
                 } else {
                     _loginUiStates.value = LoginUiStates.Success
                     val movementsRaw = it.get(MOVEMENTS) as ArrayList<HashMap<String, Any>>
-                    _movementDetail.value = fromHashMapToMovements(movementsRaw)
+                    movementDetailList = fromHashMapToMovements(movementsRaw)
                     _user.value =
                         Pair(
                             email,
@@ -70,7 +70,7 @@ class MainViewModel @Inject constructor(
                                 ) as String,
                                 password = it.get(PASSWORD) as String,
                                 imageUrl = it.get(IMAGE_URL) as String,
-                                movements = arrayListOf()
+                                movements = movementDetailList
                             )
                         )
                 }
@@ -88,10 +88,9 @@ class MainViewModel @Inject constructor(
     }
 
     fun getUserData() = _user.value!!
-    fun getMovementDetail() = _movementDetail.value
 
     fun selectMovement(index: Int) {
-        selectedMovement = _movementDetail.value!![index]
+        selectedMovement = movementDetailList[index]
     }
 
     fun setPhoto(photo: Bitmap){
